@@ -1,0 +1,566 @@
+.home-main {
+  background: #f4f7fb;
+  color: #00337c;
+}
+
+.hero-home {
+  min-height: 290px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.95) 23%,
+      rgba(255, 255, 255, 0.65) 43%,
+      rgba(255, 255, 255, 0.05) 70%
+    ),
+    url("/assets/images/moron.png");
+  background-size: cover;
+  background-position: center right;
+  display: flex;
+  align-items: center;
+  padding: 42px 0;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 72px;
+}
+
+.hero-content h1 {
+  color: #002f72;
+  font-size: 44px;
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.hero-content p {
+  color: #0042a3;
+  font-size: 21px;
+  line-height: 1.35;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.btn-primary,
+.btn-secondary {
+  min-width: 190px;
+  height: 46px;
+  width: 15em;
+  border-radius: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background: #ed002f;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(237, 0, 47, 0.2);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #0052ff;
+  border: 2px solid #0052ff;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.steps-card {
+  max-width: 1320px;
+  margin: 16px auto 0;
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid #dde8ff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 47, 114, 0.06);
+}
+
+.steps-card h2 {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.steps-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  border-right: 1px solid #d6e3fb;
+}
+
+.step-item:first-child {
+  padding-left: 0;
+}
+
+.step-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.step-number {
+  width: 24px;
+  height: 24px;
+  background: #004abb;
+  color: #ffffff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.step-icon {
+  color: #0052ff;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.step-item h3 {
+  color: #0052cc;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 3px;
+}
+
+.step-item p {
+  color: #163f91;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.dashboard-grid {
+  max-width: 1320px;
+  margin: 16px auto 0;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 16px;
+}
+
+.claims-card,
+.info-card,
+.news-card {
+  background: #ffffff;
+  border: 1px solid #dde8ff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 47, 114, 0.06);
+}
+
+.claims-card {
+  padding: 22px 24px 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header div,
+.card-title-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-icon,
+.card-title-line span {
+  color: #004abb;
+  font-size: 24px;
+}
+
+.card-header h2,
+.card-title-line h2 {
+  font-size: 18px;
+  font-weight: 900;
+  color: #00337c;
+}
+
+.card-header a {
+  color: #0052ff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.claims-content {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 24px 10px;
+}
+
+.donut-chart {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #004bd6 0deg 112deg,
+    #5aa4ff 112deg 206deg,
+    #4fbd72 206deg 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-chart::before {
+  content: "";
+  position: absolute;
+}
+
+.donut-center {
+  width: 94px;
+  height: 94px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center strong {
+  font-size: 24px;
+  color: #00337c;
+}
+
+.donut-center span {
+  font-size: 12px;
+  color: #31589c;
+}
+
+.claims-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.claim-stat {
+  display: grid;
+  grid-template-columns: 14px 1fr 52px 42px;
+  align-items: center;
+  gap: 12px;
+  color: #00337c;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.pending {
+  background: #004bd6;
+}
+
+.dot.process {
+  background: #5aa4ff;
+}
+
+.dot.solved {
+  background: #4fbd72;
+}
+
+.claim-stat strong {
+  font-size: 14px;
+}
+
+.claim-stat b {
+  font-size: 17px;
+}
+
+.claim-stat small {
+  color: #31589c;
+  font-size: 13px;
+}
+
+.claims-note {
+  height: 25px;
+  background: #f4f8ff;
+  border: 1px solid #dce8ff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  color: #31589c;
+  font-size: 12px;
+}
+
+.info-card {
+  padding: 22px 36px;
+}
+
+.info-list {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.info-icon {
+  color: #0052ff;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.info-item h3 {
+  color: #0052cc;
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.info-item p {
+  color: #163f91;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.news-card {
+  max-width: 1320px;
+  margin: 12px auto 12px;
+  padding: 12px 48px 14px;
+}
+
+.news-header h2 {
+  color: #00337c;
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.news-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.news-window {
+  width: 100%;
+  overflow: hidden;
+}
+
+.news-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.news-item {
+  min-width: 33.333%;
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 18px;
+  padding: 0 24px;
+  border-right: 1px solid #d6e3fb;
+}
+
+.news-item:last-child {
+  border-right: none;
+}
+
+.news-item img {
+  width: 128px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.news-content span {
+  color: #5072b4;
+  font-size: 11px;
+}
+
+.news-content h3 {
+  color: #0052cc;
+  font-size: 15px;
+  line-height: 1.18;
+  font-weight: 900;
+  margin: 4px 0;
+}
+
+.news-content p {
+  color: #163f91;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 30px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: #0052ff;
+  font-size: 42px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.carousel-btn.prev {
+  left: -36px;
+}
+
+.carousel-btn.next {
+  right: -36px;
+}
+
+.carousel-btn:hover {
+  color: #002f72;
+}
+
+.imagenLapiz img{
+    width: 2em;
+    height: 2em;
+}
+
+.imagenMapa img{
+    width: 2em;
+    height: 2em;
+    margin-left: 0.5em;
+}
+
+.ubicacion{
+    width: 1em;
+    height: 1em;        
+}
+
+.camara{
+    width: 1.2em;
+    height: 1.2em;    
+}
+
+.check{
+    width: 1.2em;
+    height: 1.2em;  
+}
+
+.estadistica{
+    width: 1.2em;
+    height: 1.2em;      
+}
+
+@media (max-width: 1100px) {
+  .hero-content {
+    padding: 0 32px;
+  }
+
+  .steps-card,
+  .dashboard-grid,
+  .news-card {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .steps-list {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 24px;
+  }
+
+  .step-item {
+    border-right: none;
+    padding: 0;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-item {
+    min-width: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-home {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 255, 255, 0.9)
+      ),
+      url("/img/moron-aerea.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+  }
+
+  .hero-content p {
+    font-size: 17px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .steps-list {
+    grid-template-columns: 1fr;
+  }
+
+  .claims-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .claims-stats {
+    width: 100%;
+  }
+
+  .news-card {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  .news-item {
+    min-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .news-item img {
+    width: 100%;
+    height: 150px;
+  }
+}
