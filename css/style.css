@@ -43,6 +43,7 @@ body {
 }
 
 /* LOGO */
+ 
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -103,7 +104,11 @@ body {
   font-weight: 700;
   padding: 26px 0;
 }
-
+ 
+.navbar-menu a:hover {
+  opacity: 0.75;
+}
+ 
 .navbar-menu a.active::after {
   content: "";
   position: absolute;
@@ -238,4 +243,55 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  font-size: 16px;
+  font-weight: 800;
+}
+ 
+/* =========================
+   RESPONSIVE
+========================= */
+ 
+@media (max-width: 900px) {
+  .navbar-container {
+    height: auto;
+    padding: 18px 24px;
+    flex-direction: column;
+    gap: 18px;
+  }
+ 
+  .navbar-menu {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+ 
+  .footer-container {
+    padding: 0 28px;
+    grid-template-columns: 1fr 1fr;
+  }
+ 
+  .footer-column {
+    padding-left: 24px;
+  }
+}
+ 
+@media (max-width: 600px) {
+  .navbar-menu {
+    flex-direction: column;
+    gap: 14px;
+  }
+ 
+  .navbar-actions {
+    width: 100%;
+    justify-content: center;
+  }
+ 
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+ 
+  .footer-column {
+    border-left: none;
+    padding-left: 0;
+  }
 }
