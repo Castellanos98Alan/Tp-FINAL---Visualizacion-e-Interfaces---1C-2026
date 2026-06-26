@@ -117,3 +117,41 @@ fill:"forwards"
 document
 .querySelectorAll(".card,.noticias")
 .forEach(el=>observer.observe(el));
+
+const loginTab = document.getElementById("loginTab");
+const registerTab = document.getElementById("registerTab");
+
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+
+loginTab.addEventListener("click", () => {
+
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
+
+    loginForm.classList.add("active-form");
+    registerForm.classList.remove("active-form");
+
+});
+
+registerTab.addEventListener("click", () => {
+
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
+
+    registerForm.classList.add("active-form");
+    loginForm.classList.remove("active-form");
+
+});
+
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    alert("Inicio de sesión exitoso");
+});
+
+registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    alert("Usuario registrado correctamente");
+});
