@@ -5,45 +5,258 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    
+    <link rel="stylesheet" href="/css/home.css">
+   
     <title>Document</title>
 </head>
 
-<body>
-    <header class="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-logo">
-                <div class="logo-icon">
-                    <span></span>
-                    <span></span>
-                </div>
+    <body>
+        <header class="navbar">
+            <div class="navbar-container">
+                <a href="#" class="navbar-logo">
+                    <div class="logo-icon">
+                        <span></span>
+                        <span></span>
+                    </div>
 
-                <div class="logo-text">
-                    <small>MUNICIPIO DE</small>
-                    <strong>MORÓN</strong>
-                </div>
-            </a>
-
-            <nav class="navbar-menu">
-                <a href="/html/home.html" class="active">Home</a>
-                <a href="/html/crear-reclamo.html">Crear reclamos</a>
-                <a href="#">Mis reclamos</a>
-                <a href="#">Mapa</a>
-                <a href="#">Noticias</a>
-            </nav>
-
-            <div class="navbar-actions">
-                <a href="/html/login.html" class="login-button">
-                    <span class="login-icon">👤</span>
-                    Ingresar
+                    <div class="logo-text">
+                        <small>MUNICIPIO DE</small>
+                        <strong>MORÓN</strong>
+                    </div>
                 </a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Contenido de ejemplo para que no quede pegado al footer -->
-    <main class="page-content">
-        <h1>Contenido del home</h1>
+                <nav class="navbar-menu">
+                    <a href="/html/home.html" class="active">Home</a>
+                    <a href="/html/crear-reclamo.html">Crear reclamos</a>
+                    <a href="#">Mis reclamos</a>
+                    <a href="#">Mapa</a>
+                    <a href="#">Noticias</a>
+                </nav>
+
+                <div class="navbar-actions">
+                    <a href="/html/login.html" class="login-button">
+                        <span class="login-icon">👤</span>
+                        Ingresar
+                    </a>
+                </div>
+            </div>
+        </header>
+
+    <main class="home-main">
+
+        <section class="hero-home">
+            <div class="hero-content">
+                <h1>HACEMOS<br>UN MEJOR MORÓN</h1>
+
+                <p>
+                    Informá problemas de tu barrio,<br>
+                    realizá trámites y hacé seguimiento.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="/html/crear-reclamo.html" class="btn-primary">
+                        <span class="imagenLapiz"><img src="https://images.emojiterra.com/openmoji/v13.1/512px/1f4dd.png"></span>
+                        Crear reclamo
+                    </a>
+
+                    <a href="#" class="btn-secondary">
+                        <span class="imagenMapa"><img src="https://em-content.zobj.net/source/skype/289/world-map_1f5fa-fe0f.png"></span>
+                        Ver mapa de reclamos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps-card">
+            <h2>¿Cómo funciona?</h2>
+
+            <div class="steps-list">
+                <article class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-icon">✎</div>
+                    <div>
+                        <h3>Creá tu reclamo</h3>
+                        <p>Contanos qué problema encontraste.</p>
+                    </div>
+                </article>
+
+                <article class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-icon"><img class="ubicacion" src="https://cdn-icons-png.flaticon.com/512/811/811872.png" alt=""></div>
+                    <div>
+                        <h3>Indicá la ubicación</h3>
+                        <p>Marcá en el mapa o permití tu ubicación.</p>
+                    </div>
+                </article>
+
+                <article class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-icon"><img class="camara" src="https://cdn-icons-png.flaticon.com/512/6805/6805221.png" alt=""></div>
+                    <div>
+                        <h3>Adjuntá fotos</h3>
+                        <p>Agregá imágenes que ayuden a entenderlo.</p>
+                    </div>
+                </article>
+
+                <article class="step-item">
+                    <span class="step-number">4</span>
+                    <div class="step-icon"><img class="check" src="https://images.vexels.com/media/users/3/143372/isolated/preview/6e633a235ea0d523078e667b9f84f15b-marca-de-verificacion-azul.png" alt=""></div>
+                    <div>
+                        <h3>Seguí el estado</h3>
+                        <p>Te vamos a informar los avances.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="claims-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-icon"><img class="estadistica" src="https://cdn-icons-png.flaticon.com/512/9252/9252665.png" alt=""></span>
+                        <h2>Reclamos del último mes</h2>
+                    </div>
+
+                    <a href="#">Ver más</a>
+                </div>
+
+                <div class="claims-content">
+                    <div class="donut-chart">
+                        <div class="donut-center">
+                            <strong>1.248</strong>
+                            <span>Total</span>
+                        </div>
+                    </div>
+
+                    <div class="claims-stats">
+                        <div class="claim-stat">
+                            <span class="dot pending"></span>
+                            <strong>Pendientes</strong>
+                            <b>386</b>
+                            <small>31%</small>
+                        </div>
+
+                        <div class="claim-stat">
+                            <span class="dot process"></span>
+                            <strong>En proceso</strong>
+                            <b>324</b>
+                            <small>26%</small>
+                        </div>
+
+                        <div class="claim-stat">
+                            <span class="dot solved"></span>
+                            <strong>Resueltos</strong>
+                            <b>538</b>
+                            <small>43%</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="claims-note">
+                    <span>ⓘ</span>
+                    Los datos se actualizan diariamente.
+                </div>
+            </article>
+
+            <article class="info-card">
+                <div class="card-title-line">
+                    <span>ⓘ</span>
+                    <h2>Información importante</h2>
+                </div>
+
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-icon">♙</div>
+                        <div>
+                            <h3>Participación ciudadana</h3>
+                            <p>
+                                Tu participación nos ayuda a construir un Morón más limpio,
+                                seguro y ordenado. Cada reclamo cuenta para mejorar nuestros barrios.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">◷</div>
+                        <div>
+                            <h3>Tiempos de respuesta</h3>
+                            <p>
+                                Nuestro equipo trabaja para dar respuesta a cada reclamo en el menor
+                                tiempo posible, según la complejidad de cada caso.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">☏</div>
+                        <div>
+                            <h3>Canales de atención</h3>
+                            <p>
+                                También podés comunicarte con nosotros por WhatsApp, teléfono o de forma
+                                presencial en nuestras oficinas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="news-card">
+            <div class="news-header">
+                <h2>Noticias</h2>
+            </div>
+
+            <div class="news-carousel">
+                <button class="carousel-btn prev" type="button" id="prevNews">‹</button>
+
+                <div class="news-window">
+                    <div class="news-track" id="newsTrack">
+                        <article class="news-item">
+                            <img src="https://cdnartic.ar/acDQJzJy8XpW2JtLo1VX-US5_ic=/1500x0/filters:no_upscale():format(webp):quality(40)/https://elcronistacdn.eleco.com.ar/media/2024/06/Construccion-obra.jpg" alt="Obras de pavimentación">
+
+                            <div class="news-content">
+                                <span>9 de junio de 2026</span>
+                                <h3>Nuevas obras de pavimentación en El Palomar</h3>
+                                <p>Seguimos mejorando la infraestructura de nuestros barrios.</p>
+                            </div>
+                        </article>
+
+                        <article class="news-item">
+                            <img src="https://www.sangil.gov.co/info/sangil/media/pubInt/thumbs/thpubInt_700X400_2258.webp" alt="Jornada de limpieza">
+
+                            <div class="news-content">
+                                <span>12 de mayo de 2026</span>
+                                <h3>Jornada de limpieza en Castelar</h3>
+                                <p>Vecinos y vecinas participaron de una nueva jornada ambiental.</p>
+                            </div>
+                        </article>
+
+                        <article class="news-item">
+                            <img src="https://www.castelar-digital.com.ar/img/fotos/Plaza_Quinta_Espacio_Paracone_moron_haedo_inauguracion_16.JPG" alt="Centro Cultural Morón">
+
+                            <div class="news-content">
+                                <span>18 de abril de 2026</span>
+                                <h3>Actividades en el Centro Cultural Morón</h3>
+                                <p>Conocé la agenda de talleres y eventos de este mes.</p>
+                            </div>
+                        </article>
+
+                        <article class="news-item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThuNxEKubw1GMQu86uBCnik5oNCVoBAIGZCZKP381kcd0Qbpl_af6Vi0o&s=10" alt="Atención vecinal">
+
+                            <div class="news-content">
+                                <span>1 de mayo de 2026</span>
+                                <h3>Nuevos canales de atención vecinal</h3>
+                                <p>Más opciones para consultar el estado de tus reclamos.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" type="button" id="nextNews">›</button>
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer">
@@ -101,6 +314,7 @@
         </div>
     </footer>
 
+    <script src="/js/home.js"></script>
    
 </body>
 
