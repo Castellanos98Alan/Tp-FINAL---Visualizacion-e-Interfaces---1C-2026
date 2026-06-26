@@ -1,94 +1,108 @@
+/* RESET GENERAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
- 
+
+html,
 body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: #f4f7fb;
-  color: #0b2f6b;
+  color: #001f54;
+  display: flex;
+  flex-direction: column;
 }
- 
-/* =========================
-   NAVBAR
-========================= */
- 
+
+/* NAVBAR FIJO ARRIBA */
 .navbar {
   width: 100%;
-  background: linear-gradient(90deg, #002f72 0%, #003b8f 100%);
+  background: #003f8f;
   color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 47, 114, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
- 
+
 .navbar-container {
   max-width: 1440px;
-  height: 64px;
+  height: 72px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
+/* LOGO */
  
 .navbar-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
   color: #ffffff;
+  text-decoration: none;
 }
- 
+
 .logo-icon {
   width: 44px;
   height: 44px;
-  background-color: #ffffff;
+  background: #ffffff;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
 }
- 
+
 .logo-icon span {
   width: 7px;
-  height: 24px;
+  height: 28px;
   background-color: #ed002f;
   display: block;
 }
- 
+
 .logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1;
 }
- 
+
 .logo-text small {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
 }
- 
+
 .logo-text strong {
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 800;
   letter-spacing: 0.5px;
+  color: #ffffff;
 }
- 
+
+/* LINKS NAV */
 .navbar-menu {
   display: flex;
   align-items: center;
-  gap: 42px;
+  gap: 38px;
 }
- 
+
 .navbar-menu a {
   position: relative;
   color: #ffffff;
   text-decoration: none;
   font-size: 15px;
-  font-weight: 500;
-  opacity: 0.95;
-  transition: opacity 0.2s ease;
+  font-weight: 700;
+  padding: 26px 0;
 }
  
 .navbar-menu a:hover {
@@ -99,167 +113,131 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -10px;
+  bottom: 9px;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background-color: #ffffff;
   border-radius: 999px;
 }
- 
+
+/* ACCIONES NAV */
 .navbar-actions {
   display: flex;
   align-items: center;
   gap: 18px;
 }
- 
+
 .search-button {
-  background: transparent;
   border: none;
+  background: transparent;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 26px;
   cursor: pointer;
 }
- 
+
 .login-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 38px;
+  height: 42px;
   padding: 0 18px;
   border: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
+  border-radius: 7px;
   color: #ffffff;
   text-decoration: none;
   font-size: 15px;
-  font-weight: 600;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
- 
-.login-button:hover {
-  background-color: #ffffff;
-  color: #003b8f;
-}
- 
-.login-icon {
-  font-size: 16px;
-}
- 
-/* =========================
-   CONTENIDO DE EJEMPLO
-========================= */
- 
-.page-content {
-  min-height: 420px;
-  padding: 48px 32px;
-}
- 
-/* =========================
-   FOOTER
-========================= */
- 
+
+/* FOOTER */
 .footer {
-  background: linear-gradient(90deg, #002f72 0%, #003b8f 100%);
+  width: 100%;
+  background: #003f8f;
   color: #ffffff;
-  padding: 28px 0;
+  margin-top: auto;
+  flex-shrink: 0;
 }
- 
+
 .footer-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 72px;
+  padding: 30px 56px;
   display: grid;
-  grid-template-columns: 1.4fr 1.3fr 1.5fr 1.1fr;
+  grid-template-columns: 1.3fr 1fr 1.3fr 1fr;
   gap: 36px;
   align-items: start;
 }
- 
-.footer-brand,
-.footer-column {
-  min-height: 80px;
-}
- 
-.footer-column {
-  border-left: 1px solid rgba(255, 255, 255, 0.16);
-  padding-left: 44px;
-}
- 
+
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 14px;
-  text-decoration: none;
+  gap: 12px;
   color: #ffffff;
+  text-decoration: none;
 }
- 
+
 .footer-logo-icon {
+  width: 44px;
+  height: 44px;
+  background: transparent;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
 }
- 
+
 .footer-logo-icon span {
-  width: 9px;
-  height: 38px;
+  width: 8px;
+  height: 34px;
   background-color: #ed002f;
   display: block;
 }
- 
+
 .footer-logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1;
 }
- 
+
 .footer-logo-text small {
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+  font-weight: 700;
 }
- 
+
 .footer-logo-text strong {
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: 0.5px;
 }
- 
+
+.footer-column {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  padding-left: 34px;
+}
+
 .footer-column h3 {
   font-size: 15px;
-  font-weight: 700;
   margin-bottom: 12px;
 }
- 
+
 .footer-column a,
 .footer-column p {
   display: block;
   color: #ffffff;
   text-decoration: none;
   font-size: 13px;
-  line-height: 1.7;
-  opacity: 0.95;
+  line-height: 1.8;
 }
- 
-.footer-column a:hover {
-  text-decoration: underline;
-}
- 
-.footer-column p {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
- 
+
 .social-links {
   display: flex;
-  align-items: center;
-  gap: 18px;
+  gap: 16px;
   margin-top: 12px;
 }
- 
+
 .social-links a {
-  width: 28px;
-  height: 28px;
-  background-color: #ffffff;
-  color: #003b8f;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  color: #003f8f;
   border-radius: 50%;
   display: flex;
   align-items: center;

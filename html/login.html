@@ -4,21 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Contraseña - Municipio de Morón</title>
+    <title>Iniciar Sesión - Municipio de Morón</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/estilos-recuperar.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/estilos-login.css">
 </head>
 
 <body>
 
     <!-- HEADER -->
     <header class="navbar">
-
         <div class="navbar-container">
 
-            <a href="index.html" class="navbar-logo">
-
+            <a href="/html/home.html" class="navbar-logo">
                 <div class="logo-icon">
                     <span></span>
                     <span></span>
@@ -28,59 +26,46 @@
                     <small>MUNICIPIO DE</small>
                     <strong>MORÓN</strong>
                 </div>
-
             </a>
 
             <nav class="navbar-menu">
-
-                <a href="index.html">Home</a>
-                <a href="#">Crear Reclamos</a>
+                <a href="/html/home.html" class="active">Home</a>
+                <a href="/html/crear-reclamo.html">Crear Reclamos</a>
                 <a href="#">Mis Reclamos</a>
                 <a href="#">Mapa</a>
                 <a href="#">Noticias</a>
-
             </nav>
 
             <div class="navbar-actions">
-
-                <a href="login.html" class="login-button">
+                <a href="/html/login.html" class="login-button">
                     <span class="login-icon">👤</span>
                     Ingresar
                 </a>
-
             </div>
 
         </div>
-
     </header>
 
-    <!-- CONTENIDO -->
+    <!-- LOGIN -->
+    <main class="login-container">
 
-    <main class="recuperar-container">
+        <section class="login-formulario">
 
-        <!-- FORMULARIO -->
+            <div class="login-card">
 
-        <section class="recuperar-formulario">
-
-            <div class="recuperar-card">
-
-                <h1>¿OLVIDASTE TU CONTRASEÑA?</h1>
+                <h1>INICIÁ SESIÓN</h1>
 
                 <p class="subtitulo">
-                    Ingresá el correo electrónico asociado a tu cuenta.
-                    Te enviaremos las instrucciones para recuperar tu contraseña.
+                    Ingresá para gestionar tus reclamos
                 </p>
 
-                <form id="recuperarForm">
+                <form id="loginForm">
 
                     <div class="input-group">
 
-                        <label for="email">
-                            Correo electrónico
-                        </label>
+                        <label>Correo electrónico</label>
 
                         <div class="input-icon">
-
                             <span>✉️</span>
 
                             <input
@@ -93,20 +78,77 @@
 
                     </div>
 
+                    <div class="input-group">
+
+                        <label>Contraseña</label>
+
+                        <div class="input-icon">
+
+                            <span>🔒</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Ingresá tu contraseña"
+                                required>
+
+                            <button
+                                type="button"
+                                id="mostrarPassword"
+                                class="mostrar-password">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="opciones-login">
+
+                        <label class="recordarme">
+
+                            <input type="checkbox">
+
+                            Recordarme
+
+                        </label>
+
+                        <a href="/html/recuperarContrasenia.html">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+
+                    </div>
+
                     <button
                         type="submit"
-                        class="btn-recuperar">
+                        class="btn-login">
 
-                        Recuperar contraseña
+                        👤 Ingresar
 
                     </button>
 
                 </form>
 
-                <div class="volver-login">
+                <div class="divider">
+                    o continuá con
+                </div>
 
-                    <a href="login.html">
-                        ← Volver al inicio de sesión
+                <button class="google-btn">
+
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+
+                    Continuar con Google
+
+                </button>
+
+                <div class="registro-link">
+
+                    ¿No tenés cuenta?
+
+                    <a href="/html/registrarUsuario.html">
+                        Registrate
                     </a>
 
                 </div>
@@ -115,12 +157,10 @@
 
         </section>
 
-        <!-- IMAGEN -->
-
-        <section class="recuperar-imagen">
+        <section class="login-imagen">
 
             <img
-                src="assets/images/moron.png"
+                src="/assets/images/moron.png"
                 alt="Municipio de Morón">
 
         </section>
@@ -128,14 +168,13 @@
     </main>
 
     <!-- FOOTER -->
-
     <footer class="footer">
 
         <div class="footer-container">
 
             <div class="footer-brand">
 
-                <a href="index.html" class="footer-logo">
+                <a href="/html/home.html" class="footer-logo">
 
                     <div class="footer-logo-icon">
                         <span></span>
@@ -156,7 +195,9 @@
                 <h3>Información</h3>
 
                 <a href="#">Noticias</a>
+
                 <a href="#">Preguntas frecuentes</a>
+
                 <a href="#">Términos y condiciones</a>
 
             </div>
@@ -165,8 +206,10 @@
 
                 <h3>Contacto</h3>
 
-                <p>📍 Brown 910, Morón, Buenos Aires</p>
+                <p>📍 Brown 910, Morón</p>
+
                 <p>📞 0800-666-6766</p>
+
                 <p>✉️ atencionvecinos@moron.gob.ar</p>
 
             </div>
@@ -178,8 +221,11 @@
                 <div class="social-links">
 
                     <a href="#">f</a>
+
                     <a href="#">◎</a>
+
                     <a href="#">𝕏</a>
+
                     <a href="#">▶</a>
 
                 </div>
@@ -190,7 +236,7 @@
 
     </footer>
 
-    <script src="js/recuperar.js"></script>
+    <script src="/js/login.js"></script>
 
 </body>
 
