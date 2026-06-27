@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Municipio de Morón - Mapa de Reclamos Interactivo</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="/css/mapa.css">
+</head>
+
+<body>
+    <header>
+        <a href="/html/home.html" class="navbar-logo">
+            <div class="logo-icon">
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="logo-text">
+                <small>MUNICIPIO DE</small>
+                <strong>MORÓN</strong>
+            </div>
+        </a>
+
+        <nav class="main-nav">
+            <a href="/html/home.html">Home</a>
+            <a href="/html/crear-reclamo.html">Crear reclamos</a>
+            <a href="/html/mis-reclamos.html">Mis reclamos</a>
+            <a href="/html/mapa.html" class="active">Mapa</a>
+            <a href="#">Noticias</a>
+        </nav>
+
+        <div class="header-actions">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <button class="btn-account">
+                <i class="fa-regular fa-user"></i> Mi cuenta <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <aside class="sidebar-left">
+            <div>
+                <h1>Mapa de reclamos</h1>
+
+                <p class="subtitle">Explorá los reclamos realizados en el municipio</p>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar dirección...">
+            </div>
+
+            <div class="filter-section-title">Filtros <i class="fa-solid fa-chevron-down"></i></div>
+
+            <div class="filter-group">
+                <h3>Estado</h3>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label"><input type="checkbox" checked> Todos</label>
+                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-blue"></span>Pendientes</label>
+                    <label class="checkbox-label"><input type="checkbox" checked> <span class="status-dot dot-orange"></span>En proceso</label>
+                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-green"></span>Resueltos</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Categoría</h3>
+                <select class="select-box">
+                    <option>Todas las categorías</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <h3>Fecha</h3>
+                <select class="select-box">
+                    <option>Cualquier fecha</option>
+                </select>
+            </div>
+
+            <button class="btn-clear"><i class="fa-solid fa-rotate-left"></i> Limpiar filtros</button>
+        </aside>
+
+        <section class="map-area">
+            <div id="map"></div>
+
+            <div class="map-controls-bottom">
+                <span>Mostrando 35 reclamos en esta área</span>
+                <button class="btn-update"><i class="fa-solid fa-rotate-right"></i> Actualizar</button>
+            </div>
+
+            <div class="map-zoom-controls">
+                <button class="map-btn" id="btn-zoom-in"><i class="fa-solid fa-plus"></i></button>
+                <button class="map-btn" id="btn-zoom-out"><i class="fa-solid fa-minus"></i></button>
+                
+                <button class="map-btn" id="btn-center" style="margin-top: 10px;"><i
+                        class="fa-solid fa-crosshairs"></i></button>
+            </div>
+        </section>
+
+        <aside class="sidebar-right">
+            <div class="right-header">
+                <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver al mapa</button>
+                <button class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="right-content">
+                <span class="status-badge">En proceso</span>
+
+                <div class="detail-header">
+                    <div class="detail-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="detail-title">
+                        <h2>Bache en la vía pública</h2>
+                        <p>Av. Rivadavia 18.500, Morón</p>
+                        <p>Creado el 15 de mayo de 2024 a las 10:30 hs</p>
+                        <p class="id-reclamo">ID: #1248</p>
+                    </div>
+                </div>
+
+                <p class="detail-desc">Gran bache en medio de la avenida que dificulta la circulación de vehículos.</p>
+
+                <h3 class="section-title">Fotos</h3>
+                <div class="photos-grid">
+                    <div class="photo-item"style="background-image: url('https://via.placeholder.com/150/555555/ffffff?text=Foto');"></div>
+                    <div class="photo-item"style="background-image: url('https://via.placeholder.com/150/555555/ffffff?text=Foto');"></div>
+                    
+                    <div class="photo-item"style="background-image: url('https://via.placeholder.com/150/555555/ffffff?text=Foto');">
+                    <div class="photo-overlay">+2</div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Comentarios (3)</h3>
+
+                <div class="comment-input-box">
+                    <input type="text" placeholder="Escribí tu comentario...">
+                    <button>Comentar</button>
+                </div>
+
+                <div class="comments-list">
+                    <div class="comment-item">
+                        <div class="comment-avatar">JP</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-name">Juan Pérez</span>
+                                <span class="comment-time">Hace 1 día</span>
+                            </div>
+
+                            <p class="comment-text">Sigue igual, cada vez más profundo.</p>
+
+                            <div class="comment-actions">
+                                <button class="btn-reply">Responder</button>
+                                <span class="like-count"><i class="fa-regular fa-thumbs-up"></i> 2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-avatar">ML</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-name">María López</span>
+                                <span class="comment-time">Hace 2 días</span>
+                            </div>
+
+                            <p class="comment-text">Ojalá lo solucionen pronto, es peligroso.</p>
+
+                            <div class="comment-actions">
+                                <button class="btn-reply">Responder</button>
+                                <span class="like-count"><i class="fa-regular fa-thumbs-up"></i> 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-avatar">VM</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-name">Vecino de Morón</span>
+                                <span class="comment-time">Hace 3 días</span>
+                            </div>
+
+                            <p class="comment-text">Pasé por ahí y ya comenzaron a trabajar.</p>
+
+                            <div class="comment-actions">
+                                <button class="btn-reply">Responder</button>
+                                <span class="like-count"><i class="fa-regular fa-thumbs-up"></i> 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-col">
+            <a href="#" class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="footer-logo-text">
+                        <small>MUNICIPIO DE</small>
+                        <strong>MORÓN</strong>
+                    </div>
+                </a>
+
+            
+        </div>
+
+        <div class="footer-col">
+            <ul>
+                <li><i class="fa-solid fa-location-dot"></i> Brown 910, Morón, Buenos Aires</li>
+                <li><i class="fa-solid fa-phone"></i> 0800-666-6766</li>
+                <li><i class="fa-solid fa-envelope"></i> atencionvecinos@moron.gob.ar</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Información</h4>
+
+            <ul>
+                <li><a href="#">Noticias</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contacto</h4>
+
+            <ul>
+                <li><i class="fa-solid fa-envelope"></i> atencionvecinos@moron.gob.ar</li>
+                <li><i class="fa-solid fa-phone"></i> 0800-666-6766</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Seguinos</h4>
+
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">◎</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="YouTube">▶</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/js/mapa.js"></script>
+</body>
+
+</html>
