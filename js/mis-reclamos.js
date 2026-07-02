@@ -1,24 +1,51 @@
 // 1. Datos iniciales
-let reclamos = [
+const CLAIMS_STORAGE_KEY = "moron-reclamos";
+
+const reclamosIniciales = [
     { 
         id: 1, categoria: "Baches", ubicacion: "Av. Rivadavia 18.900, Esquina San Martín, Partido de Morón", 
         descripcion: "Hay un bache grande en la calzada que dificulta la circulación de vehículos. Ya lleva varios días sin señalización.",
         estado: "En proceso", claseEstado: "badge-proceso", 
-        fotos: ["/assets/images/bache.jpg"], fecha: "2024-05-12" 
+        fotos: ["../assets/images/bache.jpg"], fecha: "2024-05-12", hora: "14:30"
     },
     { 
         id: 2, categoria: "Alumbrado", ubicacion: "Cnel. Pringles 1234, Morón - Justo cerca de la plaza central donde doblan los colectivos de la línea 238", 
         descripcion: "Foco quemado en la esquina, la calle queda muy oscura de noche.",
         estado: "Pendiente", claseEstado: "badge-pendiente", 
-        fotos: ["/assets/images/alumbrado-publico.jpg"], fecha: "2024-05-08" 
+        fotos: ["../assets/images/alumbrado-publico.jpg"], fecha: "2024-05-08", hora: "14:30"
     },
     { 
         id: 3, categoria: "Basura", ubicacion: "José Ingenieros 567, Morón", 
         descripcion: "Montículo de basura en la vereda desde hace una semana.",
         estado: "Resuelto", claseEstado: "badge-resuelto", 
-        fotos: ["/assets/images/basura-acumulada.jpeg"], fecha: "2024-05-02" 
+        fotos: ["../assets/images/basura-acumulada.jpeg"], fecha: "2024-05-02", hora: "14:30"
     }
 ];
+
+function getStoredClaims() {
+    try {
+        return JSON.parse(localStorage.getItem(CLAIMS_STORAGE_KEY)) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+let reclamos = [...getStoredClaims(), ...reclamosIniciales];
+
+function persistUserClaims() {
+    const initialIds = new Set(reclamosIniciales.map(r => r.id));
+    const userClaims = reclamos.filter(r => !initialIds.has(r.id));
+    localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(userClaims));
+}
+
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
 
 let fotosEnEdicion = [];
 
@@ -47,7 +74,9 @@ function renderList() {
     const ordenFecha = document.getElementById('filter-fecha').value;
 
     let filtrados = reclamos.filter(r => {
-        const concuerdaTexto = r.categoria.toLowerCase().includes(searchTerm) || r.ubicacion.toLowerCase().includes(searchTerm);
+        const concuerdaTexto = r.categoria.toLowerCase().includes(searchTerm)
+            || r.ubicacion.toLowerCase().includes(searchTerm)
+            || (r.numero || '').toLowerCase().includes(searchTerm);
         const concuerdaEstado = estadoFiltro === 'Todos' || r.estado === estadoFiltro;
         return concuerdaTexto && concuerdaEstado;
     });
@@ -76,8 +105,17 @@ function renderList() {
     const iconoPin = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
 
     container.innerHTML = filtrados.map(r => {
-        const fotoPrincipal = (r.fotos && r.fotos.length > 0) ? r.fotos[0] : 'https://via.placeholder.com/140x90/eeeeee/cccccc?text=Sin+foto';
-        const numeroReclamoFalso = `RCL-2024-0054${r.id.toString().padStart(2, '0')}`;
+        const categoryImages = {
+            Baches: '../assets/images/bache.jpg',
+            Alumbrado: '../assets/images/alumbrado-publico.jpg',
+            Basura: '../assets/images/basura-acumulada.jpeg'
+        };
+        const fotoPrincipal = (r.fotos && r.fotos.length > 0)
+            ? r.fotos[0]
+            : (categoryImages[r.categoria] || '../assets/images/moron.png');
+        const numeroReclamo = r.numero || `RCL-2024-0054${r.id.toString().padStart(2, '0')}`;
+        const categoriaSegura = escapeHtml(r.categoria);
+        const ubicacionSegura = escapeHtml(r.ubicacion);
         
         let accionesHtml = '';
         if (r.estado !== 'Cancelado') {
@@ -97,12 +135,12 @@ function renderList() {
 
         return `
         <article class="reclamo-card">
-            <img src="${fotoPrincipal}" alt="Foto" class="card-img">
+            <img src="${escapeHtml(fotoPrincipal)}" alt="Imagen del reclamo de ${categoriaSegura}" class="card-img">
             
-            <div class="card-info" title="${r.categoria}">
-                <h3>${r.categoria}</h3>
-                <p title="${r.ubicacion}">${iconoPin} <span>${r.ubicacion}</span></p>
-                <small>Creado el ${formatFecha(r.fecha)} - 14:30 hs</small>
+            <div class="card-info" title="${categoriaSegura}">
+                <h3>${categoriaSegura}</h3>
+                <p title="${ubicacionSegura}">${iconoPin} <span>${ubicacionSegura}</span></p>
+                <small>Creado el ${formatFecha(r.fecha)} - ${escapeHtml(r.hora || '14:30')} hs</small>
             </div>
             
             <div class="card-status">
@@ -111,7 +149,7 @@ function renderList() {
                 </div>
                 <div class="reclamo-id">
                     <small>Nº de reclamo</small>
-                    <strong>${numeroReclamoFalso}</strong>
+                    <strong>${escapeHtml(numeroReclamo)}</strong>
                 </div>
             </div>
 
@@ -144,6 +182,7 @@ function confirmDelete() {
         reclamo.estado = 'Cancelado';
         reclamo.claseEstado = 'badge-cancelado';
     }
+    persistUserClaims();
     renderList(); 
     closeDeleteModal(); 
 }
@@ -219,6 +258,7 @@ function saveEdit() {
     // };
     // reclamo.claseEstado = mapaClases[nuevoEstado];
     reclamo.fotos = [...fotosEnEdicion];
+    persistUserClaims();
     
     renderList();
     closeModal();

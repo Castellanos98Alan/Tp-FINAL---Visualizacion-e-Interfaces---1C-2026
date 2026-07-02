@@ -1,7 +1,3 @@
-/* ========================= */
-/* LOGIN */
-/* ========================= */
-
 .login-container{
     display:flex;
     min-height:calc(100vh - 150px);
@@ -36,10 +32,6 @@
     font-size:24px;
     margin-bottom:35px;
 }
-
-/* ========================= */
-/* INPUTS */
-/* ========================= */
 
 .input-group{
     margin-bottom:25px;
@@ -90,10 +82,6 @@
     font-size:18px;
 }
 
-/* ========================= */
-/* OPCIONES */
-/* ========================= */
-
 .opciones-login{
     display:flex;
     justify-content:space-between;
@@ -114,10 +102,6 @@
     font-weight:600;
 }
 
-/* ========================= */
-/* BOTON */
-/* ========================= */
-
 .btn-login{
     width:100%;
     height:60px;
@@ -134,10 +118,6 @@
 .btn-login:hover{
     background:#003b8f;
 }
-
-/* ========================= */
-/* DIVIDER */
-/* ========================= */
 
 .divider{
     display:flex;
@@ -161,10 +141,6 @@
 .divider::after{
     margin-left:15px;
 }
-
-/* ========================= */
-/* GOOGLE */
-/* ========================= */
 
 .google-btn{
     width:100%;
@@ -191,10 +167,6 @@
     width:24px;
 }
 
-/* ========================= */
-/* LINK REGISTRO */
-/* ========================= */
-
 .registro-link{
     margin-top:35px;
     text-align:center;
@@ -207,10 +179,6 @@
     font-weight:700;
     margin-left:8px;
 }
-
-/* ========================= */
-/* IMAGEN */
-/* ========================= */
 
 .login-imagen{
     width:60%;
@@ -238,10 +206,6 @@
         rgba(255,255,255,0) 100%
     );
 }
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
 
 @media(max-width:1000px){
 
