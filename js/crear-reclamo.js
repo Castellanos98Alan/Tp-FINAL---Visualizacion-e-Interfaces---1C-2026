@@ -7,6 +7,13 @@ const charCount = document.getElementById("charCount");
 const imageInput = document.getElementById("imageInput");
 const uploadText = document.getElementById("uploadText");
 const form = document.getElementById("claimForm");
+const addressInput = document.getElementById("claimAddress");
+const formError = document.getElementById("formError");
+const successCard = document.getElementById("claimSuccess");
+const claimNumber = document.getElementById("claimNumber");
+const createAnotherClaimButton = document.getElementById("createAnotherClaim");
+
+const CLAIMS_STORAGE_KEY = "moron-reclamos";
 
 let selectedCategory = "espacios-verdes";
 let selectedSubcategory = "mantenimiento";
@@ -228,7 +235,9 @@ function renderQuestions() {
 
 function selectCategory(button) {
   categoryButtons.forEach((item) => item.classList.remove("selected"));
+  categoryButtons.forEach((item) => item.setAttribute("aria-pressed", "false"));
   button.classList.add("selected");
+  button.setAttribute("aria-pressed", "true");
 
   selectedCategory = button.dataset.category;
 
@@ -246,7 +255,9 @@ function selectCategory(button) {
 
 function selectSubcategory(button) {
   subcategoryButtons.forEach((item) => item.classList.remove("selected"));
+  subcategoryButtons.forEach((item) => item.setAttribute("aria-pressed", "false"));
   button.classList.add("selected");
+  button.setAttribute("aria-pressed", "true");
 
   selectedSubcategory = button.dataset.subcategory;
 
@@ -268,6 +279,13 @@ description.addEventListener("input", () => {
 imageInput.addEventListener("change", () => {
   const quantity = imageInput.files.length;
 
+  if (quantity > 5) {
+    imageInput.value = "";
+    uploadText.textContent = "Agregar imágenes";
+    showFormError("Podés adjuntar hasta 5 fotos por reclamo.");
+    return;
+  }
+
   if (quantity === 0) {
     uploadText.textContent = "Agregar imágenes";
     return;
@@ -276,9 +294,88 @@ imageInput.addEventListener("change", () => {
   uploadText.textContent = `${quantity} imagen/es seleccionada/s`;
 });
 
+function showFormError(message) {
+  formError.textContent = message;
+  formError.hidden = false;
+}
+
+function getStoredClaims() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAIMS_STORAGE_KEY)) || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function getCategoryLabel() {
+  return document.querySelector(".option-card.selected span").textContent.trim();
+}
+
+function createClaimCode() {
+  const year = new Date().getFullYear();
+  const suffix = String(Date.now()).slice(-6);
+  return `RCL-${year}-${suffix}`;
+}
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  alert("Reclamo enviado correctamente.");
+  formError.hidden = true;
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    showFormError("Revisá los campos obligatorios antes de enviar el reclamo.");
+    return;
+  }
+
+  const cleanDescription = description.value.trim();
+  if (cleanDescription.length < 20) {
+    showFormError("La descripción debe tener al menos 20 caracteres.");
+    description.focus();
+    return;
+  }
+
+  const code = createClaimCode();
+  const today = new Date();
+  const claim = {
+    id: Date.now(),
+    numero: code,
+    categoria: getCategoryLabel(),
+    subcategoria: selectedCategory === "espacios-verdes" ? selectedSubcategory : "",
+    ubicacion: addressInput.value.trim(),
+    descripcion: cleanDescription,
+    latitud: Number(latInput.value),
+    longitud: Number(lngInput.value),
+    estado: "Pendiente",
+    claseEstado: "badge-pendiente",
+    fotos: [],
+    cantidadFotos: imageInput.files.length,
+    fecha: today.toISOString().slice(0, 10),
+    hora: today.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })
+  };
+
+  try {
+    const claims = getStoredClaims();
+    claims.unshift(claim);
+    localStorage.setItem(CLAIMS_STORAGE_KEY, JSON.stringify(claims));
+  } catch (error) {
+    showFormError("No pudimos guardar el reclamo en este navegador. Liberá espacio e intentá nuevamente.");
+    return;
+  }
+
+  claimNumber.textContent = code;
+  Array.from(form.children).forEach((element) => {
+    if (element !== successCard) element.hidden = true;
+  });
+  successCard.hidden = false;
+  successCard.focus();
+});
+
+createAnotherClaimButton.addEventListener("click", () => {
+  form.reset();
+  Array.from(form.children).forEach((element) => {
+    element.hidden = element === successCard || element === formError;
+  });
+  window.scrollTo({ top: form.offsetTop, behavior: "smooth" });
 });
 
 form.addEventListener("reset", () => {
@@ -297,6 +394,7 @@ form.addEventListener("reset", () => {
     description.value = "";
     charCount.textContent = "0";
     uploadText.textContent = "Agregar imágenes";
+    formError.hidden = true;
 
     renderQuestions();
   }, 0);
@@ -313,7 +411,6 @@ const defaultLng = -58.6198;
 const latInput = document.getElementById("claimLat");
 const lngInput = document.getElementById("claimLng");
 const useLocationButton = document.querySelector(".outline-button");
-const addressInput = document.querySelector(".search-location input");
 
 const claimMap = L.map("claimMap").setView([defaultLat, defaultLng], 15);
 
