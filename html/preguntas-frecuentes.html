@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Morón</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mis-reclamos.css">
+    <link rel="stylesheet" href="../css/preguntas-frecuentes.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css'>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container" id="navbar-container">
+            <a href="/html/home.html" class="navbar-logo">
+                <div class="logo-icon">
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="logo-text">
+                    <small>MUNICIPIO DE</small>
+                    <strong>MORÓN</strong>
+                </div>
+            </a>
+
+            <nav class="navbar-menu">
+                <a href="/html/home.html">Home</a>
+                <a href="/html/crear-reclamo.html">Crear reclamos</a>
+                <a href="/html/mis-reclamos.html">Mis reclamos</a>
+                <a href="/html/mapa.html">Mapa</a>
+                <a href="#newsTrack">Noticias</a>
+            </nav>
+            <div class="navbar-actions"> 
+                <a href="/html/login.html" class="login-button">
+                    Mi cuenta
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content" style="display: flex; justify-content: center; min-height: 60vh;">
+        <section class="main-content" style="max-width: 850px; width: 100%;">
+            
+            <h1 class="titulo-seccion" style="text-align: center; margin-top: 20px;">Preguntas Frecuentes</h1>
+            
+            <div class="faq-container">
+                
+                <div id="faq-list">
+                    <div class="faq-category">
+                        <h3 class="faq-category-title">Gestión de Cuenta</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Es obligatorio registrarse para crear un reclamo? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>Sí. Para garantizar la seguridad, evitar reportes falsos y poder notificarte sobre los avances de tu caso, es necesario que inicies sesión. Podés registrarte rápidamente con tu correo electrónico o usar tu cuenta de Google.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Qué hago si me olvido mi contraseña? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>En la pantalla de "Iniciar Sesión", hacé clic en el enlace "¿Olvidaste tu contraseña?". Te enviaremos un correo electrónico con los pasos para crear una nueva de forma segura.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">
+                        <h3 class="faq-category-title">Creación de Reclamos</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Qué tipo de problemas puedo reportar en mi barrio? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>Podés crear reclamos relacionados con Baches en la calzada, fallas en el Alumbrado público, acumulación de Basura, mantenimiento de Espacios verdes, problemas de Desagües y roturas en Veredas. Si tu problema no encaja, podés usar la categoría "Otros".</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Es obligatorio adjuntar fotos al crear un reclamo? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>No es obligatorio, pero lo recomendamos enfáticamente. Adjuntar imágenes (hasta 5 fotos) ayuda a nuestros equipos a evaluar la gravedad del problema antes de llegar al lugar, acelerando los tiempos de respuesta.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Cómo indico la ubicación exacta del problema? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>Al crear el reclamo, podés escribir la dirección en el buscador o hacer clic en "Usar mi ubicación actual". Además, el sistema te permite arrastrar el marcador (el pin) directamente en el mapa para mayor precisión.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">
+                        <h3 class="faq-category-title">Seguimiento y Edición</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Qué significan los estados "Pendiente", "En proceso" y "Resuelto"? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p><strong>Pendiente:</strong> Recibimos tu reclamo, pero aún no fue asignado a un equipo.<br>
+                                <strong>En proceso:</strong> El municipio ya está evaluando o trabajando activamente en la solución en el lugar.<br>
+                                <strong>Resuelto:</strong> El problema fue solucionado por el equipo correspondiente. Podrás ver la resolución detallada ingresando al reclamo.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Puedo modificar o cancelar un reclamo ya enviado? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>Sí, dependiendo de su estado. Si está <strong>Pendiente</strong>, podés editar toda la información o cancelarlo (deberás indicar un motivo). Si está <strong>En proceso</strong>, solo vas a poder sumar más detalles a la descripción o adjuntar fotos nuevas. Los reclamos <strong>Resueltos</strong> no se pueden modificar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">
+                        <h3 class="faq-category-title">Mapa Interactivo</h3>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Para qué sirve el Mapa de reclamos? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>El mapa interactivo te permite explorar de manera visual todos los reportes realizados en el municipio. Podés filtrar por estado, categoría o fecha para saber qué está ocurriendo cerca de tu casa.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">¿Puedo interactuar con los reclamos de otros vecinos? <span class="faq-icon">+</span></button>
+                            <div class="faq-answer">
+                                <p>¡Sí! La participación ciudadana es clave. Al seleccionar un reclamo en el mapa, vas a poder leer los detalles, dejar comentarios y reaccionar (dar "Me gusta") a los aportes de otros usuarios de la comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo">
+                    <div class="footer-logo-icon"><span></span><span></span></div>
+                    <div class="footer-logo-text"><small>MUNICIPIO DE</small><strong>MORÓN</strong></div>
+                </a>
+            </div>
+            <div class="footer-column">
+                <h3>Información</h3>
+                <a href="#newsTrack">Noticias</a>
+                <a href="/html/preguntas-frecuentes.html">Preguntas frecuentes</a>
+                <a href="#">Términos y condiciones</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><span>📍</span> Brown 910, Morón, Buenos Aires</p>
+                <p><span>📞</span> 0800-666-6766</p>
+                <p><span>✉️</span> atencionvecinos@moron.gob.ar</p>
+            </div>
+            <div class="footer-column">
+                <h3>Seguinos</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">◎</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="YouTube">▶</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="../js/preguntas-frecuentes.js"></script>
+</body>
+</html>
