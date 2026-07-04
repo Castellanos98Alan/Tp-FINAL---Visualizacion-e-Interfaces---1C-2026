@@ -18,6 +18,7 @@ const reclamosIniciales = [
         id: 3, categoria: "Basura", ubicacion: "José Ingenieros 567, Morón", 
         descripcion: "Montículo de basura en la vereda desde hace una semana.",
         estado: "Resuelto", claseEstado: "badge-resuelto", 
+        resolucion: "El equipo de higiene urbana pasó a retirar el montículo de basura en el horario de la mañana y se realizó la limpieza de la vereda.",
         fotos: ["../assets/images/basura-acumulada.jpeg"], fecha: "2024-05-02", hora: "14:30"
     }
 ];
@@ -59,7 +60,7 @@ document.getElementById('btn-clear-filters').addEventListener('click', () => {
     renderList();
 });
 
-// NUEVO: Función para actualizar el contador de caracteres en tiempo real
+// Función para actualizar el contador de caracteres en tiempo real
 function updateCharCount(textarea) {
     const counter = document.getElementById('char-counter');
     const length = textarea.value.length;
@@ -118,17 +119,26 @@ function renderList() {
         const ubicacionSegura = escapeHtml(r.ubicacion);
         
         let accionesHtml = '';
-        if (r.estado !== 'Cancelado') {
+        
+        // LÓGICA DE ESTADOS PARA LOS BOTONES APILADOS
+        if (r.estado === 'Pendiente') {
             accionesHtml = `
             <div class="card-actions">
                 <button class="btn-edit" onclick="openModal(${r.id})">${iconoEditar} Editar</button>
                 <button class="btn-delete" onclick="deleteReclamo(${r.id})">${iconoBorrar} Borrar</button>
             </div>
             `;
-        } else {
+        } else if (r.estado === 'En proceso') {
             accionesHtml = `
             <div class="card-actions">
-                <span style="color: #999; font-size: 0.85em; font-style: italic;">Solo lectura</span>
+                <button class="btn-edit" onclick="openModal(${r.id})">${iconoEditar} Editar</button>
+            </div>
+            `;
+        } else {
+            // Caso: Resuelto o Cancelado
+            accionesHtml = `
+            <div class="card-actions">
+                <span style="color: #999; font-size: 0.85em; font-style: italic; width: 100px; text-align: center;">Solo lectura</span>
             </div>
             `;
         }
@@ -155,8 +165,8 @@ function renderList() {
 
             ${accionesHtml}
             
-            <div class="card-chevron">
-                ${r.estado !== 'Cancelado' ? iconoChevron : ''}
+            <div class="card-chevron" onclick="openViewModal(${r.id})">
+                ${iconoChevron}
             </div>
         </article>
         `;
@@ -168,20 +178,48 @@ function formatFecha(fechaStr) {
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-// LÓGICA DE BORRADO
+// =========================================================
+// LÓGICA DE BORRADO (CON VALIDACIÓN DE MOTIVO)
+// =========================================================
 function deleteReclamo(id) {
     document.getElementById('delete-id').value = id;
+    
+    // Reseteamos las opciones y ocultamos el error por si abre el modal de nuevo
+    const radios = document.getElementsByName('motivo-cancelacion');
+    radios.forEach(radio => radio.checked = false);
+    document.getElementById('delete-error-msg').style.display = 'none';
+
     document.getElementById('modal-delete-container').style.display = 'flex';
     document.body.classList.add('no-scroll');
 }
 
 function confirmDelete() {
+    // Validamos que haya seleccionado un motivo
+    const radios = document.getElementsByName('motivo-cancelacion');
+    let motivoSeleccionado = null;
+    
+    for (const radio of radios) {
+        if (radio.checked) {
+            motivoSeleccionado = radio.value;
+            break;
+        }
+    }
+
+    if (!motivoSeleccionado) {
+        // Si no seleccionó nada, mostramos el error y detenemos la función
+        document.getElementById('delete-error-msg').style.display = 'block';
+        return; 
+    }
+
+    // Si seleccionó un motivo, procedemos a cancelar el reclamo
     const id = parseInt(document.getElementById('delete-id').value);
     const reclamo = reclamos.find(r => r.id === id);
     if (reclamo) {
         reclamo.estado = 'Cancelado';
         reclamo.claseEstado = 'badge-cancelado';
+        reclamo.motivoCancelacion = motivoSeleccionado; // Guardamos el motivo en el objeto
     }
+    
     persistUserClaims();
     renderList(); 
     closeDeleteModal(); 
@@ -192,23 +230,38 @@ function closeDeleteModal() {
     document.body.classList.remove('no-scroll');
 }
 
-// LÓGICA DE EDICIÓN Y FOTOS
+// =========================================================
+// LÓGICA DE EDICIÓN (RESTRICTIVA SEGÚN ESTADO)
+// =========================================================
 function openModal(id) {
     const reclamo = reclamos.find(r => r.id === id);
     document.getElementById('edit-id').value = reclamo.id;
-    document.getElementById('edit-categoria').value = reclamo.categoria;
-    // document.getElementById('edit-titulo').value = reclamo.titulo;
-    document.getElementById('edit-ubicacion').value = reclamo.ubicacion;
-    document.getElementById('edit-descripcion').value = reclamo.descripcion || '';
-    // document.getElementById('edit-estado').value = reclamo.estado;
     
-    // Inicializar el contador con los caracteres de la descripción existente
+    const catSelect = document.getElementById('edit-categoria');
+    const ubiInput = document.getElementById('edit-ubicacion');
+    const infoMsg = document.getElementById('edit-info-msg');
+    
+    catSelect.value = reclamo.categoria;
+    ubiInput.value = reclamo.ubicacion;
+    document.getElementById('edit-descripcion').value = reclamo.descripcion || '';
+    
+    if (reclamo.estado === 'En proceso') {
+        catSelect.disabled = true;
+        ubiInput.disabled = true;
+        infoMsg.style.display = 'block';
+        infoMsg.innerText = "Este reclamo está en proceso. Solo podés agregar más detalles a la descripción o adjuntar nuevas fotos.";
+    } else {
+        catSelect.disabled = false;
+        ubiInput.disabled = false;
+        infoMsg.style.display = 'none';
+    }
+    
     updateCharCount(document.getElementById('edit-descripcion'));
     
     fotosEnEdicion = reclamo.fotos ? [...reclamo.fotos] : [];
     renderFotosModal();
     document.getElementById('modal-container').style.display = 'flex';
-    document.body.classList.add('no-scroll'); // Añadido para que no baje la página de fondo al abrir el modal
+    document.body.classList.add('no-scroll'); 
 }
 
 function renderFotosModal() {
@@ -244,22 +297,11 @@ function saveEdit() {
     const reclamo = reclamos.find(r => r.id === id);
     
     reclamo.categoria = document.getElementById('edit-categoria').value;
-    // reclamo.titulo = document.getElementById('edit-titulo').value;
     reclamo.ubicacion = document.getElementById('edit-ubicacion').value;
     reclamo.descripcion = document.getElementById('edit-descripcion').value;
-    
-    // const nuevoEstado = document.getElementById('edit-estado').value;
-    // reclamo.estado = nuevoEstado;
-    // const mapaClases = {
-    //     'Pendiente': 'badge-pendiente',
-    //     'En proceso': 'badge-proceso',
-    //     'Resuelto': 'badge-resuelto',
-    //     'Cancelado': 'badge-cancelado'
-    // };
-    // reclamo.claseEstado = mapaClases[nuevoEstado];
     reclamo.fotos = [...fotosEnEdicion];
-    persistUserClaims();
     
+    persistUserClaims();
     renderList();
     closeModal();
 }
@@ -268,5 +310,87 @@ function closeModal() {
     document.getElementById('modal-container').style.display = 'none';
     document.body.classList.remove('no-scroll');
 }
+
+// =========================================================
+// LÓGICA DE VER DETALLES (NUEVO MODAL)
+// =========================================================
+function openViewModal(id) {
+    const reclamo = reclamos.find(r => r.id === id);
+    const numeroReclamo = reclamo.numero || `RCL-2024-0054${reclamo.id.toString().padStart(2, '0')}`;
+    
+    document.getElementById('view-subtitle').innerText = `Nº de reclamo: ${numeroReclamo}`;
+    
+    const badge = document.getElementById('view-estado');
+    badge.className = `status-badge ${reclamo.claseEstado}`;
+    badge.innerText = reclamo.estado;
+    
+    document.getElementById('view-categoria').innerText = reclamo.categoria;
+    document.getElementById('view-ubicacion').innerText = reclamo.ubicacion;
+    document.getElementById('view-descripcion').innerText = reclamo.descripcion || 'Sin descripción provista.';
+    
+    const resolucionContainer = document.getElementById('view-resolucion-container');
+    if (reclamo.estado === 'Resuelto' && reclamo.resolucion) {
+        resolucionContainer.style.display = 'block';
+        document.getElementById('view-resolucion').innerText = reclamo.resolucion;
+    } else {
+        resolucionContainer.style.display = 'none';
+    }
+    
+    const fotosContainer = document.getElementById('view-fotos');
+    if (reclamo.fotos && reclamo.fotos.length > 0) {
+        fotosContainer.innerHTML = reclamo.fotos.map(fotoStr => `
+            <div class="photo-thumbnail">
+                <img src="${fotoStr}" alt="Foto adjunta" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+        `).join('');
+    } else {
+        fotosContainer.innerHTML = '<p style="color:#888; font-size:0.9em; margin:0;">No hay fotos adjuntas en este reclamo.</p>';
+    }
+    
+    document.getElementById('modal-view-container').style.display = 'flex';
+    document.body.classList.add('no-scroll');
+}
+
+function closeViewModal() {
+    document.getElementById('modal-view-container').style.display = 'none';
+    document.body.classList.remove('no-scroll');
+}
+
+// =========================================================
+// LÓGICA DEL MODAL DE PREGUNTAS FRECUENTES (FAQ)
+// =========================================================
+
+function openFaqModal(event) {
+    if (event) event.preventDefault();
+    document.getElementById('modal-faq-container').style.display = 'flex';
+    document.body.classList.add('no-scroll');
+}
+
+function closeFaqModal() {
+    document.getElementById('modal-faq-container').style.display = 'none';
+    document.body.classList.remove('no-scroll');
+    
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => item.classList.remove('active'));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const currentItem = question.parentElement;
+            const isActive = currentItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                currentItem.classList.add('active');
+            }
+        });
+    });
+});
 
 renderList();
