@@ -9,8 +9,8 @@
 
   <!--mapa-->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/css/crear-reclamo.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/crear-reclamo.css" />
 </head>
 
 <body>
@@ -124,6 +124,10 @@
       <div class="navbar-actions">
 
         <a href="#" class="login-button">
+<<<<<<< HEAD
+=======
+          <span class="login-icon">👤</span>
+>>>>>>> d51af832edf376e8c4422ea8308e51b7b3614a2e
           Mi cuenta
         </a>
       </div>
@@ -251,7 +255,8 @@
           <span class="location-help">o buscá en el mapa</span>
 
           <div class="search-location">
-            <input type="text" placeholder="Escribí la dirección o lugar" />
+            <input type="text" id="claimAddress" name="claimAddress" placeholder="Ej: Brown 910, Morón"
+              autocomplete="street-address" required />
             <button type="button" aria-label="Buscar">⌕</button>
           </div>
         </div>
@@ -272,7 +277,7 @@
         <h2>3. Agregar información adicional</h2>
         <p class="section-description">Describí brevemente qué sucede y ayudanos a entender mejor la situación.</p>
 
-        <textarea id="claimDescription" maxlength="1000"
+        <textarea id="claimDescription" name="claimDescription" minlength="20" maxlength="1000" required
           placeholder="Ej: Hay ramas caídas en la plaza y dificultan el paso de los vecinos."></textarea>
 
         <div class="char-counter">
@@ -299,6 +304,22 @@
       <section class="form-actions">
         <button type="submit" class="primary-button">✈ Enviar reclamo</button>
         <button type="reset" class="danger-button">⊗ Cancelar reclamo</button>
+      </section>
+
+      <p class="form-error" id="formError" role="alert" aria-live="polite" hidden></p>
+
+      <section class="success-card" id="claimSuccess" aria-live="polite" tabindex="-1" hidden>
+        <span class="success-icon" aria-hidden="true">✓</span>
+        <div>
+          <p class="success-eyebrow">Reclamo enviado</p>
+          <h2>¡Gracias por avisarnos!</h2>
+          <p>La municipalidad recibió tu reclamo. Guardá este número para consultar el seguimiento:</p>
+          <strong class="claim-number" id="claimNumber"></strong>
+          <div class="success-actions">
+            <a class="primary-button success-link" href="mis-reclamos.html">Ver mis reclamos</a>
+            <button class="secondary-button" type="button" id="createAnotherClaim">Crear otro reclamo</button>
+          </div>
+        </div>
       </section>
     </form>
   </main>
@@ -347,8 +368,8 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="/js/crear-reclamo.js"></script>
-  
+  <script src="../js/crear-reclamo.js"></script>
+
 </body>
 
 </html>

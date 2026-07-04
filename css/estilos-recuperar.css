@@ -1,16 +1,9 @@
-/* =======================================
-   CONTENEDOR PRINCIPAL
-======================================= */
 
 .recuperar-container{
     display:flex;
     min-height:calc(100vh - 150px);
     background:#f4f7fb;
 }
-
-/* =======================================
-   FORMULARIO
-======================================= */
 
 .recuperar-formulario{
     width:40%;
@@ -41,10 +34,6 @@
     line-height:1.6;
     margin-bottom:35px;
 }
-
-/* =======================================
-   INPUT
-======================================= */
 
 .input-group{
     margin-bottom:30px;
@@ -85,10 +74,6 @@
     box-shadow:0 0 8px rgba(10,77,216,.15);
 }
 
-/* =======================================
-   BOTÓN
-======================================= */
-
 .btn-recuperar{
     width:100%;
     height:58px;
@@ -106,10 +91,6 @@
     background:#003b8f;
 }
 
-/* =======================================
-   VOLVER
-======================================= */
-
 .volver-login{
     margin-top:30px;
     text-align:center;
@@ -125,10 +106,6 @@
 .volver-login a:hover{
     text-decoration:underline;
 }
-
-/* =======================================
-   IMAGEN
-======================================= */
 
 .recuperar-imagen{
     width:60%;

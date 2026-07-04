@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d51af832edf376e8c4422ea8308e51b7b3614a2e
 *{
     margin:0;
     padding:0;
@@ -11,18 +14,10 @@ body{
     background:#f4f7fb;
 }
 
-/* ========================= */
-/* CONTENEDOR */
-/* ========================= */
-
 .registro-container{
     min-height:100vh;
     display:flex;
 }
-
-/* ========================= */
-/* FORMULARIO */
-/* ========================= */
 
 .registro-formulario{
     width:40%;
@@ -94,10 +89,6 @@ body{
     border-color:#003b8f;
 }
 
-/* ========================= */
-/* PASSWORD RULES */
-/* ========================= */
-
 .password-box{
     margin-top:15px;
     padding:18px;
@@ -122,10 +113,6 @@ body{
     font-size:14px;
 }
 
-/* ========================= */
-/* CHECK */
-/* ========================= */
-
 .terminos{
     margin:25px 0;
     display:flex;
@@ -138,10 +125,6 @@ body{
     text-decoration:none;
     font-weight:600;
 }
-
-/* ========================= */
-/* BOTON */
-/* ========================= */
 
 .btn-registro{
     width:100%;
@@ -158,10 +141,6 @@ body{
 .btn-registro:hover{
     background:#003b8f;
 }
-
-/* ========================= */
-/* GOOGLE */
-/* ========================= */
 
 .divider{
     text-align:center;
@@ -185,10 +164,6 @@ body{
     background:#f5f8ff;
 }
 
-/* ========================= */
-/* LOGIN */
-/* ========================= */
-
 .login-link{
     margin-top:30px;
     text-align:center;
@@ -200,10 +175,6 @@ body{
     font-weight:bold;
     text-decoration:none;
 }
-
-/* ========================= */
-/* IMAGEN */
-/* ========================= */
 
 .registro-imagen{
     width:60%;
@@ -228,10 +199,6 @@ body{
     rgba(255,255,255,.8) 30%,
     transparent 100%);
 }
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
 
 @media(max-width:1000px){
 
@@ -260,4 +227,8 @@ body{
         font-size:36px;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d51af832edf376e8c4422ea8308e51b7b3614a2e
