@@ -1,4 +1,3 @@
-// 1. Datos iniciales
 const CLAIMS_STORAGE_KEY = "moron-reclamos";
 
 const reclamosIniciales = [
@@ -60,14 +59,12 @@ document.getElementById('btn-clear-filters').addEventListener('click', () => {
     renderList();
 });
 
-// Función para actualizar el contador de caracteres en tiempo real
 function updateCharCount(textarea) {
     const counter = document.getElementById('char-counter');
     const length = textarea.value.length;
     counter.textContent = `${length}/1000 caracteres`;
 }
 
-// 2. Función principal
 function renderList() {
     const container = document.getElementById('lista-reclamos');
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
@@ -99,7 +96,6 @@ function renderList() {
         return;
     }
 
-    // Definición de Íconos SVG para los botones
     const iconoEditar = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
     const iconoBorrar = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
     const iconoChevron = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
@@ -120,12 +116,11 @@ function renderList() {
         
         let accionesHtml = '';
         
-        // LÓGICA DE ESTADOS PARA LOS BOTONES APILADOS
         if (r.estado === 'Pendiente') {
             accionesHtml = `
             <div class="card-actions">
                 <button class="btn-edit" onclick="openModal(${r.id})">${iconoEditar} Editar</button>
-                <button class="btn-delete" onclick="deleteReclamo(${r.id})">${iconoBorrar} Borrar</button>
+                <button class="btn-delete" onclick="deleteReclamo(${r.id})">${iconoBorrar} Cancelar</button>
             </div>
             `;
         } else if (r.estado === 'En proceso') {
@@ -135,7 +130,6 @@ function renderList() {
             </div>
             `;
         } else {
-            // Caso: Resuelto o Cancelado
             accionesHtml = `
             <div class="card-actions">
                 <span style="color: #999; font-size: 0.85em; font-style: italic; width: 100px; text-align: center;">Solo lectura</span>
@@ -178,13 +172,9 @@ function formatFecha(fechaStr) {
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-// =========================================================
-// LÓGICA DE BORRADO (CON VALIDACIÓN DE MOTIVO)
-// =========================================================
 function deleteReclamo(id) {
     document.getElementById('delete-id').value = id;
     
-    // Reseteamos las opciones y ocultamos el error por si abre el modal de nuevo
     const radios = document.getElementsByName('motivo-cancelacion');
     radios.forEach(radio => radio.checked = false);
     document.getElementById('delete-error-msg').style.display = 'none';
@@ -194,7 +184,6 @@ function deleteReclamo(id) {
 }
 
 function confirmDelete() {
-    // Validamos que haya seleccionado un motivo
     const radios = document.getElementsByName('motivo-cancelacion');
     let motivoSeleccionado = null;
     
@@ -206,18 +195,16 @@ function confirmDelete() {
     }
 
     if (!motivoSeleccionado) {
-        // Si no seleccionó nada, mostramos el error y detenemos la función
         document.getElementById('delete-error-msg').style.display = 'block';
         return; 
     }
-
-    // Si seleccionó un motivo, procedemos a cancelar el reclamo
+   
     const id = parseInt(document.getElementById('delete-id').value);
     const reclamo = reclamos.find(r => r.id === id);
     if (reclamo) {
         reclamo.estado = 'Cancelado';
         reclamo.claseEstado = 'badge-cancelado';
-        reclamo.motivoCancelacion = motivoSeleccionado; // Guardamos el motivo en el objeto
+        reclamo.motivoCancelacion = motivoSeleccionado; 
     }
     
     persistUserClaims();
@@ -230,9 +217,6 @@ function closeDeleteModal() {
     document.body.classList.remove('no-scroll');
 }
 
-// =========================================================
-// LÓGICA DE EDICIÓN (RESTRICTIVA SEGÚN ESTADO)
-// =========================================================
 function openModal(id) {
     const reclamo = reclamos.find(r => r.id === id);
     document.getElementById('edit-id').value = reclamo.id;
@@ -311,9 +295,6 @@ function closeModal() {
     document.body.classList.remove('no-scroll');
 }
 
-// =========================================================
-// LÓGICA DE VER DETALLES (NUEVO MODAL)
-// =========================================================
 function openViewModal(id) {
     const reclamo = reclamos.find(r => r.id === id);
     const numeroReclamo = reclamo.numero || `RCL-2024-0054${reclamo.id.toString().padStart(2, '0')}`;
@@ -355,42 +336,5 @@ function closeViewModal() {
     document.getElementById('modal-view-container').style.display = 'none';
     document.body.classList.remove('no-scroll');
 }
-
-// =========================================================
-// LÓGICA DEL MODAL DE PREGUNTAS FRECUENTES (FAQ)
-// =========================================================
-
-function openFaqModal(event) {
-    if (event) event.preventDefault();
-    document.getElementById('modal-faq-container').style.display = 'flex';
-    document.body.classList.add('no-scroll');
-}
-
-function closeFaqModal() {
-    document.getElementById('modal-faq-container').style.display = 'none';
-    document.body.classList.remove('no-scroll');
-    
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => item.classList.remove('active'));
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const currentItem = question.parentElement;
-            const isActive = currentItem.classList.contains('active');
-            
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                currentItem.classList.add('active');
-            }
-        });
-    });
-});
 
 renderList();

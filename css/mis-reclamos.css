@@ -1,6 +1,5 @@
 * { box-sizing: border-box; }
 
-/* NUEVO: REGLA DE ORO PARA EVITAR QUE SE ROMPA EL ANCHO EN CELULARES */
 html, body {
     overflow-x: hidden;
     width: 100%;
@@ -25,8 +24,22 @@ body.no-scroll { overflow: hidden; }
 }
 
 .nav-btn-main { background: #003366; color: white; width: 100%; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; margin-bottom: 20px; font-size: 1em;}
+
+/* ESTILOS BARRA LATERAL Y BOTÓN DE PREGUNTAS FRECUENTES */
 .sidebar-nav a { display: block; padding: 12px 10px; color: #333; text-decoration: none; border-bottom: 1px solid #eee; font-size: 0.95em;}
 .sidebar-nav a.active { color: #003366; font-weight: bold; border-left: 3px solid #003366; background: #f8f9fa; }
+
+.sidebar-nav a.nav-faq-link {
+    display: flex;
+    align-items: center;
+    color: #001a4d; /* Azul oscuro que pasaste en la imagen */
+    font-weight: 500;
+}
+
+.sidebar-nav a.nav-faq-link svg {
+    margin-right: 10px;
+    color: #001a4d; 
+}
 
 .filter-bar { display: flex; align-items: flex-end; gap: 15px; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 20px;}
 .search-box { flex: 1; position: relative; }
@@ -78,7 +91,6 @@ body.no-scroll { overflow: hidden; }
 .card-info p span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.7rem; }
 .card-info small { color: #888; font-size: 0.85em; display: block; margin-top: 6px; font-size: 0.7rem;}
 
-/* AJUSTE DE ALINEACIÓN ESTADO DEL RECLAMO */
 .card-status { 
     display: flex; 
     flex-direction: column; 
@@ -94,9 +106,9 @@ body.no-scroll { overflow: hidden; }
 .status-badge { 
     display: inline-flex; 
     align-items: center; 
-    justify-content: center; /* CENTRADO PERFECTO DE TEXTO + CIRCULITO */
+    justify-content: center; 
     gap: 6px; 
-    padding: 6px 10px; /* RELLENO SIMÉTRICO PARA BALANCEAR EL CENTRO */
+    padding: 6px 10px; 
     border-radius: 20px; 
     font-size: 0.85rem; 
     font-weight: 600; 
@@ -113,7 +125,6 @@ body.no-scroll { overflow: hidden; }
 .badge-cancelado { background: #f5f5f5; color: #666; }
 .badge-cancelado::before { content: ""; display: block; width: 6px; height: 6px; border-radius: 50%; background: #666; }
 
-/* Alineación perfecta de botones apilados (columna verde) */
 .card-actions { 
     display: flex; 
     flex-direction: column; 
@@ -126,14 +137,13 @@ body.no-scroll { overflow: hidden; }
     display: inline-flex; align-items: center; justify-content: center; gap: 6px; 
     background: white; padding: 8px 15px; cursor: pointer; border-radius: 4px; 
     font-weight: 500; font-size: 0.9em; transition: 0.2s;
-    width: 100px; 
+    width: 110px; 
 }
 .btn-edit { border: 1px solid #1976d2; color: #1976d2; }
 .btn-edit:hover { background: #e3f2fd; }
 .btn-delete { border: 1px solid #d32f2f; color: #d32f2f; }
 .btn-delete:hover { background: #ffebee; }
 
-/* Flechita interactiva */
 .card-chevron { color: #003366; opacity: 0.5; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; }
 .card-chevron:hover { transform: translateX(3px); opacity: 1; }
 
@@ -167,7 +177,6 @@ body.no-scroll { overflow: hidden; }
 .modal-body input[type="text"], .modal-body select, .modal-body textarea { width: 100%; padding: 8px 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 0.95em; }
 .modal-body textarea { resize: vertical; min-height: 70px; }
 
-/* Estilos para inputs deshabilitados */
 .modal-body input:disabled, .modal-body select:disabled {
     background-color: #f1f3f5;
     color: #6c757d;
@@ -175,12 +184,10 @@ body.no-scroll { overflow: hidden; }
     border: 1px solid #dee2e6;
 }
 
-/* Contenedor y estilos para el contador de caracteres */
 .textarea-container { display: flex; flex-direction: column; align-items: flex-end; width: 100%; }
 .textarea-container textarea { width: 100%; } 
 .char-counter { font-size: 0.8em; color: #6a7381; margin-top: 4px; }
 
-/* Modal: Fotos */
 .photo-uploader { display: flex; gap: 15px; margin-top: 5px; flex-wrap: wrap; align-items: center; }
 .photo-preview-list { display: flex; gap: 10px; flex-wrap: wrap; }
 .photo-thumbnail { position: relative; width: 90px; height: 70px; border-radius: 6px; border: 1px solid #ddd; overflow: hidden; }
@@ -189,30 +196,11 @@ body.no-scroll { overflow: hidden; }
 .add-photo-btn { width: 100px; height: 40px; border: 1px dashed #ccc; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666; cursor: pointer; background: #fafbfc; transition: 0.2s;}
 .add-photo-btn .icon { font-size: 1.5rem; margin-bottom: -5px; }
 
-/* Modal: Acciones */
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
 .btn-save { background: #1976d2; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 6px; font-weight: bold; font-size: 0.95em; transition: 0.2s; }
 .btn-save:hover { background: #0d47a1; }
 .btn-cancel { background: #fff; color: #333; padding: 10px 20px; border: 1px solid #000000; cursor: pointer; border-radius: 6px; font-size: 0.95em; transition: 0.2s; }
 .btn-danger { background: #d32f2f; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 6px; font-weight: bold; font-size: 0.95em; transition: 0.2s; }
-
-/* =========================================================
-   FAQ ACCORDION (MODAL PREGUNTAS FRECUENTES)
-   ========================================================= */
-.faq-body { margin-top: 10px; }
-.faq-item { border-bottom: 1px solid #eee; }
-.faq-item:last-child { border-bottom: none; }
-.faq-question {
-    width: 100%; text-align: left; background: none; border: none; padding: 15px 0;
-    font-size: 0.95em; font-weight: 600; color: #003366; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center; transition: color 0.2s;
-}
-.faq-question:hover { color: #1976d2; }
-.faq-icon { font-size: 1.4em; font-weight: 300; transition: transform 0.3s ease; color: #666; }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-answer p { margin: 0; padding: 0 0 15px 0; font-size: 0.9em; color: #555; line-height: 1.5; }
-.faq-item.active .faq-answer { max-height: 250px; }
-.faq-item.active .faq-icon { transform: rotate(45deg); color: #003366; }
 
 /* =========================================================
    MEDIA QUERIES 

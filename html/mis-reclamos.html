@@ -31,8 +31,7 @@
             </nav>
             <div class="navbar-actions"> 
                 <a href="/html/login.html" class="login-button">
-                    <span class="login-icon">👤</span>
-                    Ingresar
+                    Mi cuenta
                 </a>
             </div>
         </div>
@@ -43,7 +42,14 @@
             <a href="/html/crear-reclamo.html"><button class="nav-btn-main">+ Iniciar reclamo</button></a>
             <nav class="sidebar-nav">
                 <a href="/html/mis-reclamos.html" class="active">Mis reclamos</a>
-                <a href="#" onclick="openFaqModal(event)">Preguntas frecuentes</a>
+                <a href="/html/preguntas-frecuentes.html" class="nav-faq-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    Preguntas frecuentes
+                </a>
             </nav>
         </aside>
 
@@ -195,7 +201,7 @@
 
             <div class="modal-actions" style="margin-top: 25px;">
                 <button class="btn-cancel" onclick="closeDeleteModal()">Volver</button>
-                <button class="btn-danger" onclick="confirmDelete()">Confirmar cancelación</button>
+                <button class="btn-danger" onclick="confirmDelete()">Confirmar</button>
             </div>
         </div>
     </div>
@@ -239,49 +245,6 @@
         </div>
     </div>
 
-    <div id="modal-faq-container" class="modal-overlay" style="display: none;">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <div>
-                    <h3>Preguntas Frecuentes</h3>
-                    <p style="color: #666; font-size: 0.9em; margin: 2px 0 0 0;">Resolvé tus dudas sobre el sistema de reclamos.</p>
-                </div>
-                <button class="modal-close" onclick="closeFaqModal()">×</button>
-            </div>
-            
-            <div class="modal-body faq-body">
-                <div class="faq-item">
-                    <button class="faq-question">¿Cuánto tiempo tarda en resolverse un reclamo? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer">
-                        <p>El tiempo de resolución varía según la categoría y la complejidad del reclamo. Por lo general, los casos como alumbrado público o recolección de basura son atendidos dentro de las 72 horas hábiles.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">¿Cómo puedo seguir el estado de mi reclamo? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer">
-                        <p>Podés hacer el seguimiento desde la sección "Mis reclamos". El estado de tu solicitud se actualizará automáticamente a "En proceso" o "Resuelto" a medida que avance la gestión.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">¿Puedo editar un reclamo después de enviarlo? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer">
-                        <p>Sí, siempre y cuando el reclamo se encuentre en estado "Pendiente" o "En proceso", vas a poder modificar la información y adjuntar nuevas fotos haciendo clic en el botón "Editar".</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">¿Por qué mi reclamo figura como cancelado? <span class="faq-icon">+</span></button>
-                    <div class="faq-answer">
-                        <p>Un reclamo puede ser cancelado por vos mismo o si la administración determina que falta información esencial (dirección errónea, fotos irreconocibles). En ese caso, te sugerimos iniciar uno nuevo.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeFaqModal()">Cerrar</button>
-            </div>
-        </div>
-    </div>
-
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
@@ -293,7 +256,7 @@
             <div class="footer-column">
                 <h3>Información</h3>
                 <a href="#newsTrack">Noticias</a>
-                <a href="#" onclick="openFaqModal(event)">Preguntas frecuentes</a>
+                <a href="/html/preguntas-frecuentes.html">Preguntas frecuentes</a>
                 <a href="#">Términos y condiciones</a>
             </div>
             <div class="footer-column">
