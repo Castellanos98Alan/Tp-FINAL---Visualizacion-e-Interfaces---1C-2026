@@ -321,6 +321,13 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   formError.hidden = true;
 
+  if (localStorage.getItem("sesionIniciada") !== "true") {
+    sessionStorage.setItem("redirectAfterLogin", "/html/crear-reclamo.html");
+    alert("Debes iniciar sesión para iniciar un reclamo");
+    window.location.href = "/html/login.html";
+    return;
+  }
+
   if (!form.checkValidity()) {
     form.reportValidity();
     showFormError("Revisá los campos obligatorios antes de enviar el reclamo.");
@@ -401,9 +408,6 @@ form.addEventListener("reset", () => {
 });
 
 renderQuestions();
-/* =========================
-   MAPA DEL RECLAMO
-========================= */
 
 const defaultLat = -34.6534;
 const defaultLng = -58.6198;
@@ -411,6 +415,13 @@ const defaultLng = -58.6198;
 const latInput = document.getElementById("claimLat");
 const lngInput = document.getElementById("claimLng");
 const useLocationButton = document.querySelector(".outline-button");
+const searchAddressButton = document.getElementById("searchAddressButton");
+const locationStatus = document.getElementById("locationStatus");
+
+let reverseGeocodeTimer = null;
+let geocodeController = null;
+let lastGeocodeRequestAt = 0;
+const geocodeCache = new Map();
 
 const claimMap = L.map("claimMap").setView([defaultLat, defaultLng], 15);
 
@@ -420,15 +431,108 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(claimMap);
 
 const claimMarker = L.marker([defaultLat, defaultLng], {
-  draggable: true
+  draggable: true,
+  autoPan: true
 }).addTo(claimMap);
 
-function updateClaimLocation(lat, lng) {
+function setLocationStatus(message = "", type = "") {
+  locationStatus.textContent = message;
+  locationStatus.className = `location-status${type ? ` is-${type}` : ""}`;
+}
+
+function formatAddress(result) {
+  const details = result.address || {};
+  const streetName = details.road || details.pedestrian || details.path || details.footway;
+  const street = [streetName, details.house_number].filter(Boolean).join(" ");
+  const locality = details.suburb || details.neighbourhood || details.city || details.town || details.municipality;
+  const parts = [street, locality, details.state].filter(Boolean);
+
+  return [...new Set(parts)].join(", ") || result.display_name || "";
+}
+
+async function fetchGeocode(url) {
+  if (geocodeController) geocodeController.abort();
+  geocodeController = new AbortController();
+  const currentController = geocodeController;
+  const elapsed = Date.now() - lastGeocodeRequestAt;
+  const waitTime = Math.max(0, 1000 - elapsed);
+
+  if (waitTime) {
+    await new Promise((resolve, reject) => {
+      const timer = window.setTimeout(resolve, waitTime);
+      currentController.signal.addEventListener("abort", () => {
+        window.clearTimeout(timer);
+        reject(new DOMException("Solicitud cancelada", "AbortError"));
+      }, { once: true });
+    });
+  }
+
+  lastGeocodeRequestAt = Date.now();
+
+  const response = await fetch(url, {
+    headers: { Accept: "application/json" },
+    signal: currentController.signal
+  });
+
+  if (!response.ok) throw new Error("No se pudo consultar el servicio de direcciones.");
+  return response.json();
+}
+
+async function reverseGeocode(lat, lng) {
+  const cacheKey = `${lat.toFixed(5)},${lng.toFixed(5)}`;
+
+  if (geocodeCache.has(cacheKey)) {
+    addressInput.value = geocodeCache.get(cacheKey);
+    setLocationStatus("Dirección actualizada desde el mapa.", "success");
+    return;
+  }
+
+  const params = new URLSearchParams({
+    format: "jsonv2",
+    lat: String(lat),
+    lon: String(lng),
+    addressdetails: "1",
+    "accept-language": "es"
+  });
+
+  setLocationStatus("Buscando la dirección del punto seleccionado…", "loading");
+
+  try {
+    const result = await fetchGeocode(`https://nominatim.openstreetmap.org/reverse?${params}`);
+    const formattedAddress = formatAddress(result);
+
+    if (!formattedAddress) throw new Error("No encontramos una dirección para ese punto.");
+
+    geocodeCache.set(cacheKey, formattedAddress);
+    addressInput.value = formattedAddress;
+    setLocationStatus("Dirección actualizada desde el mapa.", "success");
+  } catch (error) {
+    if (error.name === "AbortError") return;
+    setLocationStatus("No pudimos obtener la dirección. Podés escribirla manualmente.", "error");
+  }
+}
+
+function scheduleReverseGeocode(lat, lng) {
+  window.clearTimeout(reverseGeocodeTimer);
+  if (geocodeController) geocodeController.abort();
+  addressInput.value = "";
+  setLocationStatus("Buscando la dirección del punto seleccionado…", "loading");
+  reverseGeocodeTimer = window.setTimeout(() => reverseGeocode(lat, lng), 450);
+}
+
+function updateClaimLocation(lat, lng, options = {}) {
+  const { lookupAddress = true, animate = false } = options;
   latInput.value = lat.toFixed(6);
   lngInput.value = lng.toFixed(6);
 
   claimMarker.setLatLng([lat, lng]);
-  claimMap.setView([lat, lng], claimMap.getZoom());
+  if (animate) {
+    claimMap.flyTo([lat, lng], Math.max(claimMap.getZoom(), 16), { duration: 0.7 });
+  } else {
+    claimMap.panTo([lat, lng]);
+  }
+
+  if (lookupAddress) scheduleReverseGeocode(lat, lng);
 }
 
 updateClaimLocation(defaultLat, defaultLng);
@@ -442,6 +546,61 @@ claimMarker.on("dragend", function () {
   updateClaimLocation(markerPosition.lat, markerPosition.lng);
 });
 
+async function searchAddress() {
+  const query = addressInput.value.trim();
+
+  if (!query) {
+    setLocationStatus("Escribí una dirección para buscarla.", "error");
+    addressInput.focus();
+    return;
+  }
+
+  window.clearTimeout(reverseGeocodeTimer);
+  const localizedQuery = /mor[oó]n/i.test(query)
+    ? query
+    : `${query}, Morón, Buenos Aires, Argentina`;
+  const params = new URLSearchParams({
+    format: "jsonv2",
+    q: localizedQuery,
+    addressdetails: "1",
+    limit: "1",
+    countrycodes: "ar",
+    "accept-language": "es"
+  });
+
+  searchAddressButton.disabled = true;
+  setLocationStatus("Buscando la dirección…", "loading");
+
+  try {
+    const results = await fetchGeocode(`https://nominatim.openstreetmap.org/search?${params}`);
+
+    if (!results.length) throw new Error("No encontramos esa dirección.");
+
+    const result = results[0];
+    const lat = Number(result.lat);
+    const lng = Number(result.lon);
+    const formattedAddress = formatAddress(result);
+
+    addressInput.value = formattedAddress || result.display_name || query;
+    updateClaimLocation(lat, lng, { lookupAddress: false, animate: true });
+    setLocationStatus("Ubicación encontrada. Podés ajustar el marcador arrastrándolo.", "success");
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      setLocationStatus(error.message || "No pudimos buscar la dirección.", "error");
+    }
+  } finally {
+    searchAddressButton.disabled = false;
+  }
+}
+
+searchAddressButton.addEventListener("click", searchAddress);
+addressInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    searchAddress();
+  }
+});
+
 useLocationButton.addEventListener("click", function () {
   if (!navigator.geolocation) {
     alert("Tu navegador no permite obtener la ubicación.");
@@ -453,7 +612,7 @@ useLocationButton.addEventListener("click", function () {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
 
-      updateClaimLocation(lat, lng);
+      updateClaimLocation(lat, lng, { animate: true });
     },
     function () {
       alert("No se pudo obtener tu ubicación. Podés marcar el punto manualmente en el mapa.");

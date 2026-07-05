@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/crear-reclamo.css" />
+  <link rel="stylesheet" href="../css/mi-cuenta.css" />
 </head>
 
 <body>
@@ -252,9 +253,11 @@
           <div class="search-location">
             <input type="text" id="claimAddress" name="claimAddress" placeholder="Ej: Brown 910, Morón"
               autocomplete="street-address" required />
-            <button type="button" aria-label="Buscar">⌕</button>
+            <button type="button" id="searchAddressButton" aria-label="Buscar dirección">⌕</button>
           </div>
         </div>
+
+        <p class="location-status" id="locationStatus" aria-live="polite"></p>
 
         <div id="claimMap" class="map-preview"></div>
 
@@ -364,6 +367,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="../js/crear-reclamo.js"></script>
+  <script src="../js/mi-cuenta.js"></script>
 
 </body>
 

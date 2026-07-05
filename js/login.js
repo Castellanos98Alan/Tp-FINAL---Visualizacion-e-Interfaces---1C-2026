@@ -38,9 +38,14 @@ formulario.addEventListener("submit", function (e) {
         password === usuarioGuardado.password
     ) {
 
+        localStorage.setItem("sesionIniciada", "true");
+
         alert("Inicio de sesión exitoso.");
 
-        window.location.href = "index.html";
+        const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
+        sessionStorage.removeItem("redirectAfterLogin");
+
+        window.location.href = redirectAfterLogin || "home.html";
 
     } else {
 

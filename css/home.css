@@ -665,11 +665,6 @@
   }
 }
 
-/* =========================
-   TABLET
-   701px a 1000px
-========================= */
-
 @media (min-width: 701px) and (max-width: 1000px) {
   body {
     overflow-x: hidden;
