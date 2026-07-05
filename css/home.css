@@ -1,6 +1,7 @@
 .home-main {
   background: #f4f7fb;
   color: #00337c;
+  overflow-x: hidden;
 }
 
 .hero-home {
@@ -54,8 +55,8 @@
 .btn-primary,
 .btn-secondary {
   min-width: 190px;
-  height: 46px;
   width: 15em;
+  height: 46px;
   border-radius: 7px;
   display: inline-flex;
   align-items: center;
@@ -83,6 +84,8 @@
 .btn-secondary:hover {
   transform: translateY(-2px);
 }
+
+/* COMO FUNCIONA */
 
 .steps-card {
   max-width: 1320px;
@@ -155,6 +158,8 @@
   font-size: 12px;
   line-height: 1.25;
 }
+
+/* DASHBOARD */
 
 .dashboard-grid {
   max-width: 1320px;
@@ -230,11 +235,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.donut-chart::before {
-  content: "";
-  position: absolute;
 }
 
 .donut-center {
@@ -316,6 +316,8 @@
   font-size: 12px;
 }
 
+/* INFORMACION IMPORTANTE */
+
 .info-card {
   padding: 22px 36px;
 }
@@ -352,6 +354,8 @@
   font-size: 13px;
   line-height: 1.45;
 }
+
+/* NOTICIAS */
 
 .news-card {
   max-width: 1320px;
@@ -448,79 +452,791 @@
   color: #002f72;
 }
 
-.imagenLapiz img{
-    width: 2em;
-    height: 2em;
+/* ICONOS */
+
+.imagenLapiz img,
+.imagenMapa img {
+  width: 2em;
+  height: 2em;
 }
 
-.imagenMapa img{
-    width: 2em;
-    height: 2em;
-    margin-left: 0.5em;
+.imagenMapa img {
+  margin-left: 0.5em;
 }
 
-.ubicacion{
-    width: 1em;
-    height: 1em;        
+.ubicacion {
+  width: 1em;
+  height: 1em;
 }
 
-.camara{
-    width: 1.2em;
-    height: 1.2em;    
+.camara,
+.check,
+.estadistica {
+  width: 1.2em;
+  height: 1.2em;
 }
 
-.check{
-    width: 1.2em;
-    height: 1.2em;  
-}
+/* =========================
+   NOTEBOOK / DESKTOP CHICO
+   1001px a 1200px
+========================= */
 
-.estadistica{
-    width: 1.2em;
-    height: 1.2em;      
-}
+@media (min-width: 1001px) and (max-width: 1200px) {
+  body {
+    overflow-x: hidden;
+  }
 
-@media (max-width: 1100px) {
+  .home-main {
+    overflow-x: hidden;
+  }
+
+  .navbar-container {
+    height: 72px;
+    padding: 0 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-logo {
+    flex-shrink: 0;
+  }
+
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .navbar-menu a {
+    font-size: 15px;
+  }
+
+  .navbar-actions {
+    flex-shrink: 0;
+  }
+
+  .login-button {
+    height: 42px;
+    padding: 0 24px;
+    font-size: 15px;
+  }
+
+  .hero-home {
+    min-height: 270px;
+    padding: 42px 0;
+    background-position: center right;
+  }
+
   .hero-content {
-    padding: 0 32px;
+    padding: 0 72px;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+  .hero-content p {
+    font-size: 20px;
   }
 
   .steps-card,
   .dashboard-grid,
   .news-card {
-    margin-left: 24px;
-    margin-right: 24px;
+    max-width: none;
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+
+  .steps-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .step-item {
+    grid-template-columns: auto auto 1fr;
+    gap: 12px;
+    padding: 0 16px;
+    border-right: 1px solid #d6e3fb;
+  }
+
+  .step-item:first-child {
+    padding-left: 0;
+  }
+
+  .step-item:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .step-icon {
+    font-size: 28px;
+  }
+
+  .step-item h3 {
+    font-size: 13px;
+  }
+
+  .step-item p {
+    font-size: 11px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .claims-card,
+  .info-card {
+    padding: 26px 32px;
+  }
+
+  .claims-content {
+    grid-template-columns: 240px 1fr;
+    gap: 36px;
+    padding: 18px 30px 14px;
+  }
+
+  .claims-stats {
+    max-width: 420px;
+  }
+
+  .info-card {
+    padding: 28px 42px;
+  }
+
+  .info-item {
+    grid-template-columns: 50px 1fr;
+  }
+
+  .news-card {
+    padding: 22px 58px 24px;
+  }
+
+  .news-item {
+    min-width: 50%;
+    grid-template-columns: 150px 1fr;
+    gap: 18px;
+    padding: 0 24px;
+  }
+
+  .news-item img {
+    width: 150px;
+    height: 95px;
+  }
+
+  .news-content h3 {
+    font-size: 16px;
+  }
+
+  .news-content p {
+    font-size: 13px;
+  }
+
+  .carousel-btn.prev {
+    left: -42px;
+  }
+
+  .carousel-btn.next {
+    right: -42px;
+  }
+
+  .footer {
+    padding: 30px 0;
+  }
+
+  .footer-container {
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.3fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .footer-column {
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+    padding-left: 28px;
+  }
+
+  .footer-column:first-of-type {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+/* =========================
+   TABLET
+   701px a 1000px
+========================= */
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .home-main {
+    overflow-x: hidden;
+  }
+
+  .navbar-container {
+    height: auto;
+    padding: 22px 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .navbar-logo {
+    justify-content: center;
+  }
+
+  .navbar-menu {
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    width: 100%;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .navbar-menu a {
+    font-size: 15px;
+  }
+
+  .navbar-actions {
+    justify-content: center;
+  }
+
+  .login-button {
+    height: 42px;
+    padding: 0 24px;
+    font-size: 15px;
+  }
+
+  .hero-home {
+    min-height: 260px;
+    padding: 40px 0;
+    background-position: center;
+  }
+
+  .hero-content {
+    padding: 0 56px;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .hero-content p {
+    font-size: 19px;
+  }
+
+  .hero-buttons {
+    gap: 20px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 210px;
+    min-width: 210px;
+  }
+
+  .steps-card,
+  .dashboard-grid,
+  .news-card {
+    margin-left: 38px;
+    margin-right: 38px;
   }
 
   .steps-list {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 24px;
+    gap: 28px 36px;
   }
 
   .step-item {
+    grid-template-columns: 28px 38px 1fr;
     border-right: none;
     padding: 0;
   }
 
   .dashboard-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .claims-card,
+  .info-card {
+    padding: 26px 28px;
+  }
+
+  .claims-content {
+    grid-template-columns: 220px 1fr;
+    padding: 18px 20px 12px;
+  }
+
+  .news-card {
+    padding: 24px 58px 28px;
   }
 
   .news-item {
-    min-width: 50%;
+    min-width: 100%;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 0 12px;
+    border-right: none;
+  }
+
+  .news-item img {
+    width: 220px;
+    height: 130px;
+  }
+
+  .news-content span {
+    font-size: 12px;
+  }
+
+  .news-content h3 {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .news-content p {
+    font-size: 14px;
+  }
+
+  .carousel-btn.prev {
+    left: -40px;
+  }
+
+  .carousel-btn.next {
+    right: -40px;
+  }
+
+  .footer {
+    padding: 30px 0;
+  }
+
+  .footer-container {
+    padding: 0 42px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 48px;
+    align-items: start;
+  }
+
+  .footer-column {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .footer-logo {
+    justify-content: flex-start;
   }
 }
 
+
 @media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    overflow: hidden;
+  }
+
+  .navbar-container {
+    height: auto;
+    padding: 14px 16px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo login"
+      "menu menu";
+    gap: 18px 12px;
+  }
+
+  .navbar-logo {
+    grid-area: logo;
+  }
+
+  .navbar-actions {
+    grid-area: login;
+    justify-content: flex-end;
+  }
+
+  .login-button {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .navbar-menu {
+    grid-area: menu;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    overflow-x: visible;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .navbar-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-menu a {
+    flex: 0 0 auto;
+    font-size: 14px;
+  }
+
+  .navbar-menu a.active::after {
+    bottom: -6px;
+  }
+
   .hero-home {
+    min-height: auto;
+    padding: 46px 0 44px;
     background:
       linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.96),
-        rgba(255, 255, 255, 0.9)
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.92) 100%
       ),
-      url("/img/moron-aerea.jpg");
+      url("/assets/images/municipiomoron2.jpeg");
     background-size: cover;
     background-position: center;
+  }
+
+  .hero-content {
+    padding: 0 32px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+    line-height: 1.35;
+    margin-bottom: 26px;
+  }
+
+  .hero-buttons {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+  }
+
+  .steps-card,
+  .dashboard-grid,
+  .news-card {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .steps-card {
+    padding: 28px 26px;
+  }
+
+  .steps-card h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .steps-list {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .step-item {
+    grid-template-columns: 28px 40px 1fr;
+    align-items: start;
+    gap: 14px;
+    padding: 0;
+    border-right: none;
+  }
+
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .step-icon {
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .step-item h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .step-item p {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .claims-card,
+  .info-card {
+    padding: 24px 18px;
+  }
+
+  .card-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .claims-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 24px;
+    padding: 20px 0 16px;
+  }
+
+  .donut-chart {
+    width: 150px;
+    height: 150px;
+  }
+
+  .donut-center {
+    width: 88px;
+    height: 88px;
+  }
+
+  .claims-stats {
+    width: 100%;
+    gap: 18px;
+  }
+
+  .claim-stat {
+    grid-template-columns: 14px 1fr 46px 36px;
+    gap: 10px;
+  }
+
+  .claims-note {
+    height: auto;
+    min-height: 32px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .info-card {
+    padding: 24px 20px;
+  }
+
+  .info-list {
+    gap: 24px;
+  }
+
+  .info-item {
+    grid-template-columns: 38px 1fr;
+    gap: 14px;
+  }
+
+  .info-icon {
+    font-size: 30px;
+  }
+
+  .info-item h3 {
+    font-size: 15px;
+  }
+
+  .info-item p {
+    font-size: 13px;
+  }
+
+  .news-card {
+    padding: 22px 38px 24px;
+    margin-bottom: 0;
+  }
+
+  .news-header h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .news-item {
+    min-width: 100%;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0 8px;
+    border-right: none;
+  }
+
+  .news-item img {
+    width: 100%;
+    height: 150px;
+  }
+
+  .news-content span {
+    font-size: 11px;
+  }
+
+  .news-content h3 {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .news-content p {
+    font-size: 13px;
+  }
+
+  .carousel-btn {
+    font-size: 38px;
+    width: 28px;
+    height: 40px;
+  }
+
+  .carousel-btn.prev {
+    left: -30px;
+  }
+
+  .carousel-btn.next {
+    right: -30px;
+  }
+
+  .footer {
+    padding: 30px 0 32px;
+  }
+
+  .footer-container {
+    padding: 0 24px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .footer-brand,
+  .footer-column {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .footer-column {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .footer-logo {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .footer-logo-icon {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .footer-logo-icon span {
+    width: 8px;
+    height: 32px;
+  }
+
+  .footer-logo-text {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-logo-text small {
+    font-size: 10px;
+  }
+
+  .footer-logo-text strong {
+    font-size: 21px;
+  }
+
+  .footer-column h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .footer-column a {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .footer-column p {
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .social-links a {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   CELULAR CHICO
+========================= */
+
+@media (max-width: 430px) {
+  .navbar-container {
+    padding: 12px 14px 14px;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-text small {
+    font-size: 10px;
+  }
+
+  .logo-text strong {
+    font-size: 18px;
+  }
+
+  .login-button {
+    height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .navbar-menu {
+    gap: 24px;
+  }
+
+  .navbar-menu a {
+    font-size: 14px;
+  }
+
+  .hero-content {
+    padding: 0 32px;
   }
 
   .hero-content h1 {
@@ -531,36 +1247,35 @@
     font-size: 17px;
   }
 
-  .hero-buttons {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .steps-list {
-    grid-template-columns: 1fr;
-  }
-
-  .claims-content {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .claims-stats {
-    width: 100%;
+  .steps-card,
+  .dashboard-grid,
+  .news-card {
+    margin-left: 22px;
+    margin-right: 22px;
   }
 
   .news-card {
-    padding-left: 36px;
-    padding-right: 36px;
-  }
-
-  .news-item {
-    min-width: 100%;
-    grid-template-columns: 1fr;
+    padding: 22px 36px 24px;
   }
 
   .news-item img {
-    width: 100%;
-    height: 150px;
+    height: 135px;
+  }
+
+  .claim-stat {
+    grid-template-columns: 12px 1fr 42px 32px;
+    font-size: 12px;
+  }
+
+  .claim-stat strong {
+    font-size: 13px;
+  }
+
+  .claim-stat b {
+    font-size: 15px;
+  }
+
+  .claim-stat small {
+    font-size: 12px;
   }
 }
