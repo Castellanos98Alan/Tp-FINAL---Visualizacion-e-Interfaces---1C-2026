@@ -1,0 +1,53 @@
+/* MODAL MI CUENTA */
+.account-trigger { background: transparent; cursor: pointer; font-family: inherit; }
+.account-modal {
+  position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
+  padding: 24px; visibility: hidden; opacity: 0;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+.account-modal.is-open { visibility: visible; opacity: 1; }
+.account-modal__backdrop {
+  position: absolute; inset: 0; background: rgba(5, 18, 39, .58);
+  backdrop-filter: blur(1.5px);
+}
+.account-card {
+  position: relative; z-index: 1; width: min(100%, 510px); max-height: calc(100vh - 48px);
+  padding: 34px 30px 28px; overflow: auto; background: #fff; color: #11366f;
+  border: 1px solid #d6dce7; border-radius: 13px;
+  box-shadow: 0 22px 70px rgba(0, 23, 60, .27);
+  transform: translateY(12px) scale(.985); transition: transform 180ms ease;
+}
+.account-modal.is-open .account-card { transform: translateY(0) scale(1); }
+.account-card__close {
+  position: absolute; top: 20px; right: 20px; width: 34px; height: 34px;
+  display: grid; place-items: center; border: 0; border-radius: 50%;
+  color: #0a2e68; background: transparent; cursor: pointer;
+}
+.account-card__close:hover { background: #f0f5ff; }
+.account-card__close svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.account-card__header h2 { margin: 0 0 5px; color: #0754c7; font-size: 28px; line-height: 1.1; font-weight: 850; }
+.account-card__header p { margin: 0; color: #55719d; font-size: 15px; }
+.account-profile { display: flex; align-items: center; gap: 25px; margin: 22px 0 16px; }
+.account-profile__avatar {
+  flex: 0 0 auto; width: 70px; height: 70px; display: grid; place-items: center;
+  border-radius: 50%; background: #e6efff; color: #0754c7; font-size: 23px; font-weight: 800;
+}
+.account-profile strong { color: #0b2d64; font-size: 21px; }
+.account-data { display: grid; gap: 7px; }
+.account-row {
+  min-height: 48px; display: grid; grid-template-columns: 28px 145px minmax(0, 1fr) 18px;
+  align-items: center; gap: 10px; padding: 5px 13px 5px 17px;
+  border: 1px solid #cfddf5; border-radius: 8px; box-shadow: 0 1px 3px rgba(0, 55, 130, .05);
+}
+.account-row > svg:first-child, .account-row__chevron {
+  width: 22px; height: 22px; fill: none; stroke: #0961ef; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.account-row__chevron { width: 17px; height: 17px; stroke: #6c8cbb; }
+.account-row span, .account-row strong { color: #365783; font-size: 13px; font-weight: 500; }
+.account-row strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-row input {
+  width: 100%; height: 34px; padding: 0 9px; color: #183f77; font: 500 13px inherit;
+  border: 1px solid #8ab4f8; border-radius: 5px; outline: none;
+}
+.account-row input:focus { border-color: #0961ef; box-shadow: 0 0 0 3px rgba(9, 97, 239, .11); }
