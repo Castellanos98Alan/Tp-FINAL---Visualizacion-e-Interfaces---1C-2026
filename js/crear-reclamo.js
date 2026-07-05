@@ -401,9 +401,6 @@ form.addEventListener("reset", () => {
 });
 
 renderQuestions();
-/* =========================
-   MAPA DEL RECLAMO
-========================= */
 
 const defaultLat = -34.6534;
 const defaultLng = -58.6198;
