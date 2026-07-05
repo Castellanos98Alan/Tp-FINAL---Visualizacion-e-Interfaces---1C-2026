@@ -148,7 +148,7 @@
     }
 
     .recuperar-imagen{
-        height:350px;
+        display: none;
     }
 
 }
@@ -166,5 +166,10 @@
     .subtitulo{
         font-size:16px;
     }
+
+.recuperar-imagen{
+    display: none;
+    }
+
 
 }

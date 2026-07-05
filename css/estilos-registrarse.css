@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d51af832edf376e8c4422ea8308e51b7b3614a2e
 *{
     margin:0;
     padding:0;
@@ -211,9 +206,9 @@ body{
         width:100%;
     }
 
-    .registro-imagen{
-        height:350px;
-    }
+   .registro-imagen{
+        display: none;
+}
 
 }
 
@@ -227,8 +222,9 @@ body{
         font-size:36px;
     }
 
-<<<<<<< HEAD
+.registro-imagen{
+        display: none;
 }
-=======
+    
+
 }
->>>>>>> d51af832edf376e8c4422ea8308e51b7b3614a2e
