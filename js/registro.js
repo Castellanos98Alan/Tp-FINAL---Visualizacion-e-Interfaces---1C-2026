@@ -4,6 +4,8 @@ formulario.addEventListener("submit", function (e) {
 
     e.preventDefault();
 
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const confirmarPassword = document.getElementById("confirmarPassword").value;
@@ -36,11 +38,16 @@ formulario.addEventListener("submit", function (e) {
 
     // Guardar usuario
     const usuario = {
+        nombre: nombre,
+        apellido: apellido,
+        name: `${nombre} ${apellido}`.trim(),
         email: email,
         password: password
     };
 
     localStorage.setItem("usuario", JSON.stringify(usuario));
+    localStorage.removeItem("sesionIniciada");
+    localStorage.removeItem("perfilUsuario");
 
     alert("Usuario registrado correctamente.");
 

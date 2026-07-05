@@ -2,6 +2,7 @@
 .account-trigger { background: transparent; cursor: pointer; font-family: inherit; }
 .account-modal {
   position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
+  width: 100%; min-height: 100vh; min-height: 100dvh;
   padding: 24px; visibility: hidden; opacity: 0;
   transition: opacity 180ms ease, visibility 180ms ease;
 }
@@ -16,7 +17,10 @@
   border: 1px solid #d6dce7; border-radius: 13px;
   box-shadow: 0 22px 70px rgba(0, 23, 60, .27);
   transform: translateY(12px) scale(.985); transition: transform 180ms ease;
+  overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #adc5e9 transparent;
 }
+.account-card::-webkit-scrollbar { width: 6px; }
+.account-card::-webkit-scrollbar-thumb { background: #adc5e9; border-radius: 999px; }
 .account-modal.is-open .account-card { transform: translateY(0) scale(1); }
 .account-card__close {
   position: absolute; top: 20px; right: 20px; width: 34px; height: 34px;
@@ -51,3 +55,79 @@
   border: 1px solid #8ab4f8; border-radius: 5px; outline: none;
 }
 .account-row input:focus { border-color: #0961ef; box-shadow: 0 0 0 3px rgba(9, 97, 239, .11); }
+.account-password-fields { width: 100%; display: grid; gap: 6px; padding: 3px 0; }
+.account-row--password:has(.account-password-fields) { padding-top: 8px; padding-bottom: 8px; }
+.account-form-error {
+  margin: 10px 2px 0; padding: 9px 11px; color: #b42335; background: #fff2f4;
+  border: 1px solid #f3bcc5; border-radius: 6px; font-size: 12px; line-height: 1.35;
+}
+.account-form-error[hidden] { display: none; }
+.account-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 17px; }
+.account-button { height: 45px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 7px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.account-button svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.account-button--primary { color: #fff; background: #075bea; border: 1px solid #075bea; }
+.account-button--primary:hover { background: #0049c5; }
+.account-button--logout { color: #ed1739; background: #fff; border: 1px solid #cbd8eb; }
+.account-button--logout:hover { background: #fff5f6; border-color: #f1a6b2; }
+.account-claims { width: max-content; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 24px auto 0; color: #075bea; font-size: 14px; font-weight: 800; text-decoration: none; }
+.account-claims svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.account-claims .account-claims__arrow { width: 17px; }
+body.account-modal-open { overflow: hidden; }
+
+@media (max-width: 768px) {
+  .account-modal { padding: 18px; }
+  .account-card { width: min(100%, 480px); max-height: calc(100dvh - 36px); padding: 30px 24px 24px; }
+  .account-row { grid-template-columns: 26px 125px minmax(0, 1fr) 18px; }
+  .account-actions { gap: 12px; }
+}
+
+@media (max-width: 560px) {
+  .account-modal { align-items: end; padding: 0; }
+  .account-card {
+    width: 100%; max-height: 94vh; max-height: 94dvh;
+    padding: 28px 18px calc(22px + env(safe-area-inset-bottom));
+    border: 0; border-top: 1px solid #d6dce7; border-radius: 18px 18px 0 0;
+  }
+  .account-card__close { top: 15px; right: 14px; }
+  .account-card__header h2 { font-size: 25px; }
+  .account-card__header p { max-width: calc(100% - 36px); font-size: 14px; line-height: 1.35; }
+  .account-profile { gap: 17px; margin-top: 19px; }
+  .account-profile__avatar { width: 58px; height: 58px; font-size: 20px; }
+  .account-profile strong { font-size: 19px; }
+  .account-row { grid-template-columns: 24px 1fr 18px; gap: 9px; padding: 8px 11px; }
+  .account-row > span { grid-column: 2; align-self: end; font-size: 11px; }
+  .account-row > strong, .account-row > input { grid-column: 2; align-self: start; }
+  .account-password-fields { grid-column: 2; grid-row: 2; }
+  .account-row > svg:first-child, .account-row__chevron { grid-row: 1 / span 2; }
+  .account-row__chevron { grid-column: 3; }
+  .account-actions { grid-template-columns: 1fr; gap: 10px; margin-top: 14px; }
+  .account-button { width: 100%; min-height: 46px; }
+  .account-claims { margin-top: 19px; }
+}
+
+@media (max-width: 380px) {
+  .account-card { padding: 24px 14px calc(18px + env(safe-area-inset-bottom)); border-radius: 15px 15px 0 0; }
+  .account-card__close { top: 11px; right: 10px; }
+  .account-card__header h2 { font-size: 23px; }
+  .account-card__header p { font-size: 13px; }
+  .account-profile { gap: 13px; margin: 16px 0 13px; }
+  .account-profile__avatar { width: 50px; height: 50px; font-size: 18px; }
+  .account-profile strong { font-size: 17px; }
+  .account-data { gap: 6px; }
+  .account-row { grid-template-columns: 22px minmax(0, 1fr) 16px; gap: 7px; padding: 7px 9px; }
+  .account-row > svg:first-child { width: 20px; height: 20px; }
+  .account-row span, .account-row strong { font-size: 12px; }
+  .account-row input { height: 36px; font-size: 12px; }
+  .account-form-error { margin-top: 7px; font-size: 11px; }
+  .account-claims { margin-top: 15px; font-size: 13px; }
+}
+
+@media (max-height: 720px) and (min-width: 561px) {
+  .account-modal { padding: 12px; }
+  .account-card { max-height: calc(100dvh - 24px); padding-top: 25px; padding-bottom: 20px; }
+  .account-profile { margin: 14px 0 12px; }
+  .account-profile__avatar { width: 58px; height: 58px; font-size: 20px; }
+  .account-claims { margin-top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) { .account-modal, .account-card { transition: none; } }

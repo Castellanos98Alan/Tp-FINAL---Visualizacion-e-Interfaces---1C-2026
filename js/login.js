@@ -38,6 +38,8 @@ formulario.addEventListener("submit", function (e) {
         password === usuarioGuardado.password
     ) {
 
+        localStorage.setItem("sesionIniciada", "true");
+
         alert("Inicio de sesión exitoso.");
 
         window.location.href = "home.html";
