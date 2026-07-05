@@ -1,5 +1,3 @@
-
-
 *{
     margin:0;
     padding:0;
@@ -208,9 +206,9 @@ body{
         width:100%;
     }
 
-    .registro-imagen{
-        height:350px;
-    }
+   .registro-imagen{
+        display: none;
+}
 
 }
 
@@ -223,5 +221,10 @@ body{
     .form-card h1{
         font-size:36px;
     }
+
+.registro-imagen{
+        display: none;
+}
+    
 
 }

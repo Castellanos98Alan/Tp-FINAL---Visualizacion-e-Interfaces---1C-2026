@@ -219,7 +219,7 @@
     }
 
     .login-imagen{
-        height:350px;
+        display: none;
     }
 
 }
@@ -242,5 +242,11 @@
         flex-direction:column;
         gap:15px;
     }
+
+     .login-imagen{
+        display: none;
+
+    }
+    
 
 }
