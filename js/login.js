@@ -42,7 +42,10 @@ formulario.addEventListener("submit", function (e) {
 
         alert("Inicio de sesión exitoso.");
 
-        window.location.href = "home.html";
+        const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
+        sessionStorage.removeItem("redirectAfterLogin");
+
+        window.location.href = redirectAfterLogin || "home.html";
 
     } else {
 

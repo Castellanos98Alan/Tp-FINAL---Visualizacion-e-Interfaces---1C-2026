@@ -254,9 +254,11 @@
           <div class="search-location">
             <input type="text" id="claimAddress" name="claimAddress" placeholder="Ej: Brown 910, Morón"
               autocomplete="street-address" required />
-            <button type="button" aria-label="Buscar">⌕</button>
+            <button type="button" id="searchAddressButton" aria-label="Buscar dirección">⌕</button>
           </div>
         </div>
+
+        <p class="location-status" id="locationStatus" aria-live="polite"></p>
 
         <div id="claimMap" class="map-preview"></div>
 
