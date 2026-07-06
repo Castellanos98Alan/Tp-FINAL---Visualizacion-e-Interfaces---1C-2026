@@ -121,7 +121,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-.navbar-menu {
+/*.navbar-menu {
   display: flex;
   align-items: center;
   gap: 42px;
@@ -151,7 +151,7 @@ body {
 .navbar-menu a:hover::after,
 .navbar-menu a.active::after {
   width: 100%;
-}
+}*/
 
 .navbar-actions {
   display: flex;
