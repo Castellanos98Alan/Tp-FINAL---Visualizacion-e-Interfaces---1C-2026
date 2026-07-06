@@ -10,35 +10,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/mapa.css">
     <link rel="stylesheet" href="/css/mi-cuenta.css">
 </head>
 
 <body>
-    <header>
-        <a href="/html/home.html" class="navbar-logo">
-            <div class="logo-icon">
-                <span></span>
-                <span></span>
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="navbar-container">
+
+            <a href="/html/home.html" class="navbar-logo">
+                <div class="logo-icon">
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="logo-text">
+                    <small>MUNICIPIO DE</small>
+                    <strong>MORÓN</strong>
+                </div>
+            </a>
+
+            <nav class="navbar-menu">
+                <a href="/html/home.html" >Home</a>
+                <a href="/html/crear-reclamo.html">Crear Reclamos</a>
+                <a href="/html/mis-reclamos.html">Mis Reclamos</a>
+                <a href="/html/mapa.html" class="active" >Mapa</a>
+            </nav>
+
+            <div class="navbar-actions">
+                <a href="/html/login.html" class="login-button">
+                    
+                    Ingresar
+                </a>
             </div>
 
-            <div class="logo-text">
-                <small>MUNICIPIO DE</small>
-                <strong>MORÓN</strong>
-            </div>
-        </a>
-
-        <nav class="main-nav">
-            <a href="/html/home.html">Home</a>
-            <a href="/html/crear-reclamo.html">Crear reclamos</a>
-            <a href="/html/mis-reclamos.html">Mis reclamos</a>
-            <a href="/html/mapa.html" class="active">Mapa</a>
-        </nav>
-
-        <div class="header-actions">
-            <button class="btn-account">
-                 Mi cuenta 
-            </button>
         </div>
     </header>
 
@@ -61,24 +68,34 @@
                 <h3>Estado</h3>
 
                 <div class="checkbox-group">
-                    <label class="checkbox-label"><input type="checkbox" checked> Todos</label>
-                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-blue"></span>Pendientes</label>
-                    <label class="checkbox-label"><input type="checkbox" checked> <span class="status-dot dot-orange"></span>En proceso</label>
-                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-green"></span>Resueltos</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-todos" checked> Todos</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-pendiente" class="filtro-estado" value="pendiente"> <span class="status-dot dot-blue"></span>Pendientes</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-proceso" class="filtro-estado" value="en-proceso"checked> <span class="status-dot dot-orange"></span>En proceso</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-resuelto" class="filtro-estado" value="resuelto"> <span class="status-dot dot-green"></span>Resueltos</label>
                 </div>
             </div>
 
             <div class="filter-group">
                 <h3>Categoría</h3>
                 <select class="select-box">
-                    <option>Todas las categorías</option>
+                    <option value="todas">Todas las categorías</option>
+                    <option value="baches">Baches</option>
+                    <option value="alumbrado">Alumbrado</option>
+                    <option value="basura">Basura</option>
+                    <option value="espacios-verdes">Espacios verdes</option>
+                    <option value="desagues">Desagües</option>
+                    <option value="veredas">Veredas</option>
+                    <option value="otros">Otros</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <h3>Fecha</h3>
                 <select class="select-box">
-                    <option>Cualquier fecha</option>
+                    <option value="cualquier">Cualquier fecha</option>
+                    <option value="hoy">Hoy</option>
+                    <option value="semana">Última semana</option>
+                    <option value="mes">Último mes</option>
                 </select>
             </div>
 
