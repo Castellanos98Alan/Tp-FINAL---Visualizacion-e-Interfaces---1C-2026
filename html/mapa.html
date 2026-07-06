@@ -68,24 +68,34 @@
                 <h3>Estado</h3>
 
                 <div class="checkbox-group">
-                    <label class="checkbox-label"><input type="checkbox" checked> Todos</label>
-                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-blue"></span>Pendientes</label>
-                    <label class="checkbox-label"><input type="checkbox" checked> <span class="status-dot dot-orange"></span>En proceso</label>
-                    <label class="checkbox-label"><input type="checkbox"> <span class="status-dot dot-green"></span>Resueltos</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-todos" checked> Todos</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-pendiente" class="filtro-estado" value="pendiente"> <span class="status-dot dot-blue"></span>Pendientes</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-proceso" class="filtro-estado" value="en-proceso"checked> <span class="status-dot dot-orange"></span>En proceso</label>
+                    <label class="checkbox-label"><input type="checkbox" id="chk-resuelto" class="filtro-estado" value="resuelto"> <span class="status-dot dot-green"></span>Resueltos</label>
                 </div>
             </div>
 
             <div class="filter-group">
                 <h3>Categoría</h3>
                 <select class="select-box">
-                    <option>Todas las categorías</option>
+                    <option value="todas">Todas las categorías</option>
+                    <option value="baches">Baches</option>
+                    <option value="alumbrado">Alumbrado</option>
+                    <option value="basura">Basura</option>
+                    <option value="espacios-verdes">Espacios verdes</option>
+                    <option value="desagues">Desagües</option>
+                    <option value="veredas">Veredas</option>
+                    <option value="otros">Otros</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <h3>Fecha</h3>
                 <select class="select-box">
-                    <option>Cualquier fecha</option>
+                    <option value="cualquier">Cualquier fecha</option>
+                    <option value="hoy">Hoy</option>
+                    <option value="semana">Última semana</option>
+                    <option value="mes">Último mes</option>
                 </select>
             </div>
 
