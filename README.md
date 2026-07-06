@@ -1,7 +1,7 @@
 # TP-FINAL: Morón Responde 🌎
 
 **Trabajo Práctico Final - Visualización e Interfaces - 2026** 
-![Estado] (https://img.shields.io/badge/Estado-Finalizado-green)
+![Estado](https://img.shields.io/badge/Estado-Finalizado-green)
 
 ---
 
