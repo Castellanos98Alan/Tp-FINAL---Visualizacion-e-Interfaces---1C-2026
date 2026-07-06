@@ -126,16 +126,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const replacement = document.createElement(enabled ? "input" : "strong");
 
       if (enabled) {
-        replacement.type = "text";
+        replacement.type = field === "phone" ? "tel" : "text";
         replacement.name = field;
         replacement.value = current.textContent;
         replacement.setAttribute("aria-label", row.querySelector("span").textContent);
-      } else {
-        replacement.id = `account${field[0].toUpperCase()}${field.slice(1)}`;
-        replacement.textContent = current.value;
-      }
-      current.replaceWith(replacement);
-    });
+
+        if (field === "phone") {
+          replacement.inputMode = "tel";
+          replacement.autocomplete = "tel";
+          replacement.placeholder = "+54 9 11 1234-5678";
+
+        } else {
+          replacement.id = `account${field[0].toUpperCase()}${field.slice(1)}`;
+          replacement.textContent = current.value;
+        }
+        current.replaceWith(replacement);
+      }});
 
     const passwordRow = accountData.querySelector('[data-field="password"]');
     const passwordValue = passwordRow.querySelector("strong, .account-password-fields");
@@ -171,6 +177,50 @@ document.addEventListener("DOMContentLoaded", () => {
     return "";
   }
 
+  function limpiarPrefijoCelularNacional(numero) {
+    for (const areaLength of [2, 3, 4]) {
+      const codigoArea = numero.slice(0, areaLength);
+      const resto = numero.slice(areaLength);
+
+      if (resto.startsWith("15")) {
+        const normalizado = codigoArea + resto.slice(2);
+
+        if (normalizado.length === 10) {
+          return normalizado;
+        }
+      }
+    }
+
+    return numero;
+  }
+
+  function validateArgentineMobilePhone(phone) {
+    const value = phone.trim();
+
+    if (!value) {
+      return "Ingresá un número de teléfono.";
+    }
+
+    const digits = value.replace(/\D/g, "");
+    let nationalNumber = digits;
+
+    if (digits.startsWith("549")) {
+      nationalNumber = digits.slice(3);
+    } else if (digits.startsWith("54")) {
+      return "Para celular argentino en formato internacional usá +54 9 + código de área + número.";
+    } else if (digits.startsWith("0")) {
+      nationalNumber = limpiarPrefijoCelularNacional(digits.slice(1));
+    } else {
+      nationalNumber = limpiarPrefijoCelularNacional(digits);
+    }
+
+    if (!/^\d{10}$/.test(nationalNumber)) {
+      return "Ingresá un celular argentino válido. Ej: +54 9 11 1234-5678 o 11 1234-5678.";
+    }
+
+    return "";
+  }
+
   function openModal(event) {
     event.preventDefault();
     lastFocusedElement = event.currentTarget;
@@ -196,6 +246,16 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.querySelectorAll("[data-account-close]").forEach((element) => element.addEventListener("click", closeModal));
   editButton.addEventListener("click", () => {
     if (!editing) return setEditing(true);
+
+    const phoneInput = accountData.querySelector('[name="phone"]');
+    const phoneError = validateArgentineMobilePhone(phoneInput.value);
+
+    if (phoneError) {
+      formError.textContent = phoneError;
+      formError.hidden = false;
+      phoneInput.focus();
+      return;
+    }
 
     const newPassword = accountData.querySelector('[name="newPassword"]').value;
     const confirmPassword = accountData.querySelector('[name="confirmPassword"]').value;
@@ -233,3 +293,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderAccount();
 });
+
