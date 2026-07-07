@@ -278,11 +278,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const badge = sidebarRight.querySelector(".status-badge");
     const title = sidebarRight.querySelector(".detail-title h2");
-    const direccion = sidebarRight.querySelector(
-      ".detail-title p:nth-of-type(1)",
-    );
+    const direccion = sidebarRight.querySelector(".detail-title p:nth-of-type(1)");
     const idText = sidebarRight.querySelector(".id-reclamo");
     const desc = sidebarRight.querySelector(".detail-desc");
+    
+    // 1. Agregamos esta línea para atrapar el círculo contenedor
+    const iconBackground = sidebarRight.querySelector(".detail-icon"); 
+    
+    // Esto atrapa el dibujito de adentro (ya lo tenías)
     const iconContainer = sidebarRight.querySelector(".detail-icon i");
 
     if (badge) {
@@ -294,13 +297,19 @@ document.addEventListener("DOMContentLoaded", () => {
             : "Resuelto";
       badge.className = `status-badge status-${reclamo.estado}`;
     }
+
+    // 2. AGREGAMOS ESTO: Le inyectamos la clase de color al círculo
+    if (iconBackground) {
+        iconBackground.className = `detail-icon status-${reclamo.estado}`;
+    }
+
     if (title) title.textContent = reclamo.titulo;
     if (direccion) direccion.textContent = reclamo.direccion;
     if (idText) idText.textContent = `ID: #${reclamo.id}`;
     if (desc) desc.textContent = reclamo.desc;
     if (iconContainer)
       iconContainer.className = `fa-solid ${categoriaIconos[reclamo.categoria]}`;
-  }
+}
 
   if (sidebarRight) {
     sidebarRight.addEventListener("click", (e) => {
