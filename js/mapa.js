@@ -42,7 +42,6 @@ const categoriaIconos = {
   otros: "fa-circle-question",
 };
 
-// Base de dato de ejemplo.
 const listaReclamos = [
   {
     id: 1248,
@@ -117,7 +116,6 @@ document
   .getElementById("btn-center")
   .addEventListener("click", () => map.setView(centerCoords, 14));
 
-// Lógica de filtros.
 document.addEventListener("DOMContentLoaded", () => {
   const sidebarRight = document.querySelector(".sidebar-right");
   const btnClose = document.querySelector(".btn-close");
@@ -133,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".filter-group:nth-of-type(4) select");
   const btnClear = document.querySelector(".btn-clear");
 
-  // --- 1. Renderizado y filtrado de mapa.
   function actualizarMapa() {
     capaMarcadores.clearLayers();
 
@@ -197,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
       txtContador.textContent = `Mostrando ${contadorReclamos} reclamos en esta área`;
   }
 
-  // 2. Registrar eventos de filtrado.
   checkboxesEstado.forEach((cb) => {
     cb.addEventListener("change", (e) => {
       const texto = cb.parentElement.textContent.trim().toLowerCase();
@@ -261,7 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3. Lógica de detalle derecho.
   if (sidebarRight) {
     sidebarRight.addEventListener("click", (e) => {
       const botonCerrar = e.target.closest(".btn-close, .btn-back");
@@ -278,14 +273,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const badge = sidebarRight.querySelector(".status-badge");
     const title = sidebarRight.querySelector(".detail-title h2");
-    const direccion = sidebarRight.querySelector(".detail-title p:nth-of-type(1)");
+    const direccion = sidebarRight.querySelector(
+      ".detail-title p:nth-of-type(1)",
+    );
     const idText = sidebarRight.querySelector(".id-reclamo");
     const desc = sidebarRight.querySelector(".detail-desc");
-    
-    // 1. Agregamos esta línea para atrapar el círculo contenedor
-    const iconBackground = sidebarRight.querySelector(".detail-icon"); 
-    
-    // Esto atrapa el dibujito de adentro (ya lo tenías)
+
+    const iconBackground = sidebarRight.querySelector(".detail-icon");
+
     const iconContainer = sidebarRight.querySelector(".detail-icon i");
 
     if (badge) {
@@ -298,9 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
       badge.className = `status-badge status-${reclamo.estado}`;
     }
 
-    // 2. AGREGAMOS ESTO: Le inyectamos la clase de color al círculo
     if (iconBackground) {
-        iconBackground.className = `detail-icon status-${reclamo.estado}`;
+      iconBackground.className = `detail-icon status-${reclamo.estado}`;
     }
 
     if (title) title.textContent = reclamo.titulo;
@@ -309,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (desc) desc.textContent = reclamo.desc;
     if (iconContainer)
       iconContainer.className = `fa-solid ${categoriaIconos[reclamo.categoria]}`;
-}
+  }
 
   if (sidebarRight) {
     sidebarRight.addEventListener("click", (e) => {
@@ -362,7 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarMapa();
 });
 
-// Buscador directo con enter.
 const buscadorInput = document.querySelector(".search-box input");
 
 if (buscadorInput) {
