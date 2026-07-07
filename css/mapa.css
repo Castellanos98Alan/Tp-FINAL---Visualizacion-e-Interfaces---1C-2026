@@ -663,6 +663,29 @@
             text-shadow: 1.7px 0px 0px white;
         }
 
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 16px;
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+
+        .status-badge.status-pendiente {
+            background-color: var(--active-blue);
+        }
+
+        .status-badge.status-en-proceso {
+            background-color: var(--orange-status);
+        }
+
+        .status-badge.status-resuelto {
+            background-color: var(--green-status);
+        }
+
         /* Tablets y Laptops Pequeñas (Menos de 1024px). */
         @media (max-width: 1024px) {
             body {
@@ -782,29 +805,4 @@
             .photo-item {
                 width: calc(50% - 4px);
             }
-}
-
-
-           .status-badge {
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 16px;
-    color: white; 
-    transition: background-color 0.2s ease;
-}
-
-/* Colores dinámicos que inyecta tu JavaScript */
-.status-badge.status-pendiente {
-    background-color: var(--active-blue);
-}
-
-.status-badge.status-en-proceso {
-    background-color: var(--orange-status);
-}
-
-.status-badge.status-resuelto {
-    background-color: var(--green-status);
-}
+        }
